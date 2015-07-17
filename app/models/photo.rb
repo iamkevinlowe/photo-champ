@@ -1,4 +1,7 @@
 class Photo < ActiveRecord::Base
-  belongs_to :user
+
   mount_uploader :url, PhotoUploader
+
+  belongs_to :user
+  belongs_to :category
 end
