@@ -6,6 +6,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'figaro'
 gem 'pundit'
+gem 'stripe'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
