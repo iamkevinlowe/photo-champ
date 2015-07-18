@@ -13,4 +13,10 @@ class PhotoPolicy < ApplicationPolicy
   def create?
     new?
   end
+
+  def destroy?
+    record.user == user ||
+    user.role == 'premium' ||
+    user.role == 'admin'
+  end
 end
