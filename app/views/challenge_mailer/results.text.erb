@@ -1,0 +1,15 @@
+Hi <%= @photo.user.name %>,
+
+<% if @result == 'win' %>
+  Congratulations, your <%= link_to "photo", @photo %> won!
+<% elsif @result == 'lose' %>
+  Sorry, your <%= link_to "photo", @photo %> lost.
+<% elsif @result == 'tie' %>
+  Draw! Your <%= link_to "photo", @photo %> tied.
+<% end %>
+Start a new <%= link_to "challenge", category_path(@photo.category) %>.
+
+Current photo record:
+Wins: <%= @photo.win %>
+Losses: <%= @photo.loss %>
+Draws: <%= @photo.tie %>
