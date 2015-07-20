@@ -7,7 +7,7 @@ gem 'fog'
 gem 'figaro'
 gem 'pundit'
 gem 'stripe'
-gem 'countdown'
+gem 'jquery-countdown-rails'
 gem 'sendgrid'
 gem 'pry-rails'
 
