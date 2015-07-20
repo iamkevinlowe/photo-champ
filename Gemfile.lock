@@ -39,6 +39,10 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.2)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -49,6 +53,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -57,6 +62,8 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
+    countdown (0.1.0)
+      json
     debug_inspector (0.0.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
@@ -188,6 +195,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.6.1)
     mini_magick (4.2.7)
     mini_portile (0.6.2)
@@ -200,6 +208,13 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+    pg (0.18.2)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
@@ -224,6 +239,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.3)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
@@ -247,6 +267,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sendgrid (1.2.0)
+      json
+    slop (3.6.0)
     spring (1.3.6)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -283,19 +306,26 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
+  binding_of_caller
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
+  countdown
   devise
   figaro
   fog
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
+  pg
+  pry-rails
   pundit
   rails (= 4.2.1)
+  rails_12factor
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  sendgrid
   spring
   sqlite3
   stripe
