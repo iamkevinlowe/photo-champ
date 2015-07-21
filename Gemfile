@@ -10,6 +10,7 @@ gem 'stripe'
 gem 'jquery-countdown-rails'
 gem 'sendgrid'
 gem 'pry-rails'
+gem 'bitly'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

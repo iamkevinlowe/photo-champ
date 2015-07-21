@@ -1,5 +1,9 @@
 class ChallengesController < ApplicationController
 
+  def show
+    
+  end
+
   def update
     @challenge = Challenge.find(params[:id])
     if @challenge.update_attributes(challenge_params)

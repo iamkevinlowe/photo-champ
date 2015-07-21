@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :charges, only: [:new, :create]
-  resources :category
-  resources :photo, except: [:edit, :update]
+  resources :categories
+  resources :photos, except: [:edit, :update]
+  resources :challenges, only: [:show]
 
   root to: 'welcome#index'
 

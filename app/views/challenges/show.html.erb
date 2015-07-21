@@ -1,0 +1,31 @@
+<!-- FB and Twitter Scripts -->
+<script>
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+
+<!-- Facebook Share button -->
+<!-- https://developers.facebook.com/docs/plugins/share-button -->
+<div id="fb-root"></div>
+<%= content_tag(:div, "", class: 'fb-share-button', data: { href: request.original_url, layout: 'button' }) %>
+
+<br>
+
+<!-- Twitter Tweet button -->
+<!-- https://dev.twitter.com/web/tweet-button -->
+<%= link_to "Tweet", "https://twitter.com/share", class: 'twitter-share-button', data: { url: request.original_url, text: 'Vote for the best photo!', count: 'none', hashtags: 'photochamp' } %>
+
+<br>
+
+<!-- Shortened URL -->
+<!-- https://github.com/philnash/bitly -->
+<!-- In production, change to: "#{request.original_url}" -->
+<%= Bitly.client.shorten("http://photocha.mp").short_url %>
