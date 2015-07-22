@@ -25,7 +25,19 @@
 
 <br>
 
+<%= content_for :meta_tags do %>
+<!-- Anything you put in here will show up in the header -->
+<% end %>
+
 <!-- Shortened URL -->
 <!-- https://github.com/philnash/bitly -->
 <!-- In production, change to: "#{request.original_url}" -->
 <%= Bitly.client.shorten("http://photocha.mp").short_url %>
+
+<div class="countdown"></div>
+
+<script>
+$(function(){
+  $(".countdown").countdown({until: Date(<%= (6.hours.from_now).to_i * 1000 %>)});
+})
+</script>

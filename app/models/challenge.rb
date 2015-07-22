@@ -6,6 +6,12 @@ class Challenge < ActiveRecord::Base
   before_create :complete_false
   after_update :results_email
 
+  def self.send_results
+    Challenge.where("ends_at < ? AND completed = ?", Time.now, false).each do |challenge|
+      challenge.complete!
+    end
+  end
+
   private
 
   def default_length
@@ -14,6 +20,7 @@ class Challenge < ActiveRecord::Base
 
   def complete_false
     self.complete = false
+    true
   end
 
   def results_email

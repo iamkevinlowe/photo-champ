@@ -12,5 +12,24 @@
  *
  *= require_tree .
  *= require_self
- *= require jquery.countdown
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "jquery.countdown";
+
+html, body {
+  background: #eee;
+}
+
+.nav {
+  margin-top: 9px
+}
+
+.mtl {
+  margin-top: 20px;
+}
+
+.text-color-primary {
+  color: #aaa;
+}

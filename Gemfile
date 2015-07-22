@@ -11,6 +11,7 @@ gem 'jquery-countdown-rails'
 gem 'sendgrid'
 gem 'pry-rails'
 gem 'bitly'
+gem 'bootstrap-sass'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
