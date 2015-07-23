@@ -11,32 +11,32 @@
     <div class="item active">
       <img src="http://placehold.it/960x640" alt="First">
       <div class="carousel-caption">
-        <p>[Category Name]</p>
-        <p>Image by: [User Name]</p>
+        <p><%= @top_photos[0].category.name.capitalize %></p>
+        <p>Image by: <%= @top_photos[0].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <img src="http://placehold.it/960x640" alt="Second">
       <div class="carousel-caption">
-        <p>[Category Name]</p>
-        <p>Image by: [User Name]</p>
+        <p><%= @top_photos[1].category.name.capitalize %></p>
+        <p>Image by: <%= @top_photos[1].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <img src="http://placehold.it/960x640" alt="Third">
       <div class="carousel-caption">
-        <p>[Category Name]</p>
-        <p>Image by: [User Name]</p>
+        <p><%= @top_photos[2].category.name.capitalize %></p>
+        <p>Image by: <%= @top_photos[2].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <img src="http://placehold.it/960x640" alt="Fourth">
       <div class="carousel-caption">
-        <p>[Category Name]</p>
-        <p>Image by: [User Name]</p>
+        <p><%= @top_photos[3].category.name.capitalize %></p>
+        <p>Image by: <%= @top_photos[3].user.name %></p>
       </div>
     </div>
   </div>

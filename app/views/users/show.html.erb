@@ -1,0 +1,38 @@
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <h3>Top Competitors</h3>
+    <% if @top_photos.nil? %>
+      <div class="col-md-4 inline-block">
+        <div class="empty-img"></div>
+      </div>
+    <% else %>
+      <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <h3>Current Challenges</h3>
+    <% if @challenge_photos.any? %>
+      <%= render partial: 'photos/photo', collection: @challenge_photos, as: :photo %>
+    <% else %>
+      <div class="col-md-4 inline-block">
+        <div class="empty-img"></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <h3>My Photos</h3>
+    <% if @photos.nil? %>
+      <div class="col-md-4 inline-block">
+        <div class="empty-img"></div>
+      </div>
+    <% else %>
+      <%= render partial: @photos %>
+    <% end %>
+  </div>
+</div>

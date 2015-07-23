@@ -17,6 +17,6 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:length, :votes_challenger, :votes_challenged, :complete)
+    params.require(:challenge).permit(:length, :votes_challenger, :votes_challenged)
   end
 end

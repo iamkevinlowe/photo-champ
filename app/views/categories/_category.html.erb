@@ -1,0 +1,11 @@
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <h3><%= link_to category.name.capitalize, category %></h3>
+    <% photos_array(category.photos) %>
+    <% 3.times do %>
+      <% if @category_photos.any? %>
+        <%= render partial: 'photos/photo', locals: { photo: photo_from_array } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

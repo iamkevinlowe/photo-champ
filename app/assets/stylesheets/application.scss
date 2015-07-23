@@ -33,3 +33,24 @@ html, body {
 .text-color-primary {
   color: #aaa;
 }
+
+.inline-block {
+  display: inline-block;
+}
+
+.empty-img {
+  width: 360px;
+  height: 240px;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 6px;
+  background-color: #ccc;
+}
+
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+.middle {
+  margin: 0 auto;
+}

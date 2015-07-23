@@ -1,0 +1,9 @@
+<div class="col-md-4 clearfix inline-block">
+  <%= link_to photo do %>
+    <img src="http://placehold.it/360x240" alt="Photo" class="img-rounded img-responsive">
+  <% end %>
+  <small>
+    <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+    <span class="pull-right">Photo by: <%= link_to photo.user.name, photo.user %></span>
+  </small>
+</div>

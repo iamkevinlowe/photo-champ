@@ -20,7 +20,7 @@ class Challenge < ActiveRecord::Base
 
   def complete_false
     self.complete = false
-    true
+    self.ends_at = Time.now + self.length.hours
   end
 
   def results_email

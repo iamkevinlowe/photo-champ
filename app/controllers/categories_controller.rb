@@ -1,11 +1,11 @@
-class CategoriesControlelr < ApplicationController
+class CategoriesController < ApplicationController
 
   def index
-    
+    @categories = Category.all
   end
 
   def show
-    
+    @category = Category.find(params[:id])
   end
 
   def new
@@ -25,4 +25,6 @@ class CategoriesControlelr < ApplicationController
   end
 
   def destroy
+
+  end
 end
