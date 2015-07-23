@@ -12,6 +12,22 @@ class Challenge < ActiveRecord::Base
     end
   end
 
+  def winner
+    if self.completed? && !draw?
+      self.votes_challenger > self.votes_challenged ? self.challenger : self.challenged
+    end
+  end
+
+  def loser
+    if self.completed? && !draw?
+      self.votes_challenger < self.votes_challenged ? self.challenger : self.challenged
+    end
+  end
+
+  def draw?
+    return true if self.completed? && self.votes_challenger == self.votes_challenged
+  end
+
   private
 
   def default_length
@@ -19,24 +35,22 @@ class Challenge < ActiveRecord::Base
   end
 
   def complete_false
-    self.complete = false
+    self.completed = false
     self.ends_at = Time.now + self.length.hours
   end
 
+  def complete!
+    self.completed = true
+    results_email
+  end
+
   def results_email
-    if self.complete?
-      photo_challenger = self.challenger
-      photo_challenged = self.challenged
-      if self.votes_challenger == self.votes_challenged
-        ChallengeMailer.results_email(photo_challenger, 'tie')
-        ChallengeMailer.results_email(photo_challenged, 'tie')
-      elsif self.votes_challenger > self.votes_challenged
-        ChallengeMailer.results_email(photo_challenger, 'win')
-        ChallengeMailer.results_email(photo_challenged, 'lose')
-      else
-        ChallengeMailer.results_email(photo_challenged, 'win')
-        ChallengeMailer.results_email(photo_challenger, 'lose')
-      end
-    end   
+    if draw?
+      ChallengeMailer.results_email(self.challenger, 'tie')
+      ChallengeMailer.results_email(self.challenged, 'tie')
+    else
+      ChallengeMailer.results_email(winner, 'win')
+      ChallengeMailer.results_email(loser, 'lose')
+    end
   end
 end
