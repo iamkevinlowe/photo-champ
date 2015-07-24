@@ -1,0 +1,32 @@
+<div class="row text-color-primary">
+  <div class="com-sm-12">
+    <h3>Edit Photo</h3>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <%= form_for @photo do |f| %>
+
+    <div class="col-sm-4">
+      <div class="form-group form-inline">
+        <%= f.label :category %>
+        <%= f.select(:category_id, options_for_select(@categories), {}, { class: 'form-control' }) %>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+    </div>
+
+    <div class="col-sm-4">
+      <%= f.submit "Done", class: 'btn btn-default pull-right' %>
+    </div>
+  <% end %>
+</div>
+
+<hr>
+
+<div class="row mtl">
+  <div class="col-sm-12">
+    <%= image_tag(@photo.url, alt: @photo.category.name, class: 'img-responsive middle') %>
+  </div>
+</div>

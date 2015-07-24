@@ -1,4 +1,6 @@
 module CategoriesHelper
+
+  # Randomly picks unique photos for index view
   def photos_array(photos)
     @category_photos = photos.to_a
   end

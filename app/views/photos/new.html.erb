@@ -1,0 +1,40 @@
+<% javascript_include_tag 'upload-preview.js' %>
+
+<div class="row text-color-primary">
+  <div class="col-sm-12">
+    <h3>Upload Photo</h3>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <%= form_for @photo do |f| %> 
+
+    <div class="col-sm-4">
+      <div class="form-group form-inline">
+        <%= f.label :category %>
+        <%= f.select(:category_id, options_for_select(@categories), {}, { class: 'form-control' }) %>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.file_field :url %>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <%= f.submit "Upload", class: 'btn btn-default pull-right' %>
+    </div>
+  <% end %>  
+</div>
+
+<hr>
+
+<div class="row mtl">
+  <div class="col-sm-12">
+    <div class="upload-preview">
+      <!-- Created an upload_preview javascript -->
+      <img class="img-responsive middle"/>
+    </div>
+  </div>
+</div>

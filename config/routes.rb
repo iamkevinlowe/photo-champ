@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :charges, only: [:new, :create]
   resources :categories
-  resources :photos, except: [:edit, :update]
+  resources :photos, except: [:index]
   resources :challenges, only: [:show]
 
   root to: 'welcome#index'

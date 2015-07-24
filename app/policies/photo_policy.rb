@@ -2,9 +2,9 @@ class PhotoPolicy < ApplicationPolicy
 
   def new?
     if user.role == 'standard'
-      user.images.count < 5
+      user.photos.count < 5
     elsif user.role == 'premium'
-      user.images.count < 20
+      user.photos.count < 20
     elsif user.role == 'admin'
       return true
     end
@@ -14,9 +14,16 @@ class PhotoPolicy < ApplicationPolicy
     new?
   end
 
-  def destroy?
+  def edit?
     record.user == user ||
-    user.role == 'premium' ||
     user.role == 'admin'
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
   end
 end

@@ -1,20 +1,40 @@
 <div class="row mtl text-color-primary">
   <div class="col-xs-12 clearfix">
-    <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
+    <% if @photo.url.url.nil? %>
+      <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
+    <% else %>
+      <%= image_tag(@photo.url, alt: @photo.category.name, class: 'img-rounded img-responsive') %>
+    <% end %>
     <span class="pull-left"><%= @photo.category.name.capitalize %></span>
-    <span class="pull-right">Image by: <%= @photo.user.name %></span>
+    <span class="pull-right">Photo by: <%= @photo.user.name %></span>
   </div>
+</div>
 
-  <div class="col-xs-4 col-xs-offset-4 text-center">
-    <h5>Wins: <%= @photo.win %></h5>
-    <h5>Losses: <%= @photo.loss %></h5>
-    <h5>Ties: <%= @photo.tie %></h5>
-  </div>
-  <div class="col-xs-4">
+<div class="row text-color-primary">
+  <div class="col-xs-4 ptl">
     <%= link_to "Button 1", "#", class: 'btn btn-default' %>
     <%= link_to "Button 2", "#", class: 'btn btn-default' %>
   </div>
 
+  <div class="col-xs-4 text-center">
+    <h5>Wins: <%= @photo.win %></h5>
+    <h5>Losses: <%= @photo.loss %></h5>
+    <h5>Ties: <%= @photo.tie %></h5>
+  </div>
+
+  <div class="col-xs-4 ptl text-right">
+    <% if policy(@photo).edit? %>
+      <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
+    <% end %>
+    <% if policy(@photo).destroy? %>
+      <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row text-color-primary">
   <div class="col-xs-12">
     <h3>Comments</h3>
   </div>

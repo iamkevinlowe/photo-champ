@@ -9,7 +9,11 @@
 
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="http://placehold.it/960x640" alt="First">
+      <% if @top_photos[0].url.url.nil? %>
+        <img src="http://placehold.it/960x640" alt="First" class="middle">
+      <% else %>
+        <%= image_tag(@top_photos[0].url.feature, alt: @top_photos[0].category.name, class: 'middle') %>
+      <% end %>  
       <div class="carousel-caption">
         <p><%= @top_photos[0].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[0].user.name %></p>
@@ -17,7 +21,11 @@
     </div>
 
     <div class="item">
-      <img src="http://placehold.it/960x640" alt="Second">
+      <% if @top_photos[1].url.url.nil? %>
+        <img src="http://placehold.it/960x640" alt="Second" class="middle">
+      <% else %>
+        <%= image_tag(@top_photos[1].url.feature, alt: @top_photos[1].category.name, class: 'middle') %>
+      <% end %> 
       <div class="carousel-caption">
         <p><%= @top_photos[1].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[1].user.name %></p>
@@ -25,7 +33,11 @@
     </div>
 
     <div class="item">
-      <img src="http://placehold.it/960x640" alt="Third">
+      <% if @top_photos[2].url.url.nil? %>
+        <img src="http://placehold.it/960x640" alt="Third" class="middle">
+      <% else %>
+        <%= image_tag(@top_photos[2].url.feature, alt: @top_photos[2].category.name, class: 'middle') %>
+      <% end %> 
       <div class="carousel-caption">
         <p><%= @top_photos[2].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[2].user.name %></p>
@@ -33,7 +45,11 @@
     </div>
 
     <div class="item">
-      <img src="http://placehold.it/960x640" alt="Fourth">
+      <% if @top_photos[3].url.url.nil? %>
+        <img src="http://placehold.it/960x640" alt="Fourth" class="middle">
+      <% else %>
+        <%= image_tag(@top_photos[3].url.feature, alt: @top_photos[3].category.name, class: 'middle') %>
+      <% end %> 
       <div class="carousel-caption">
         <p><%= @top_photos[3].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[3].user.name %></p>

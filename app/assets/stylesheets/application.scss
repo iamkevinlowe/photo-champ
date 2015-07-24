@@ -30,6 +30,15 @@ html, body {
   margin-top: 20px;
 }
 
+.ptl {
+  margin-top: 20px;
+}
+
+hr {
+  margin: 0;
+  border-top: 1px solid #ddd;
+}
+
 .text-color-primary {
   color: #aaa;
 }
@@ -38,19 +47,7 @@ html, body {
   display: inline-block;
 }
 
-.empty-img {
-  width: 360px;
-  height: 240px;
-  display: inline-block;
-  max-width: 100%;
-  border-radius: 6px;
-  background-color: #ccc;
-}
-
-.carousel-inner > .item > img {
-  margin: 0 auto;
-}
-
 .middle {
+  display: block;
   margin: 0 auto;
 }
