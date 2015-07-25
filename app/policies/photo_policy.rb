@@ -15,8 +15,10 @@ class PhotoPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user ||
-    user.role == 'admin'
+    if user.present?
+      record.user == user ||
+      user.role == 'admin'
+    end
   end
 
   def update?

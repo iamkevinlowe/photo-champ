@@ -1,31 +1,31 @@
 class ChargesController < ApplicationController 
 
-  def new
-    @stripe_btn_data = {
-      key: "#{ Rails.configuration.stripe[:publishable_key] }",
-      description: "PhotoChamp Upgrade - #{current_user.email}",
-      amount: Amount.default
-    }
-  end
-
   def create
     customer = Stripe::Customer.create(
       email: current_user.email,
-      card: params[:stripeToken]
+      card: params[:stripeToken],
+      plan: 'PhotoChampPremium'
     )
 
-    charge = Stripe::Charge.create(
-      customer: customer.id,
-      amount: Amount.default,
-      description: "PhotoChamp Upgrade - #{current_user.email}",
-      currency: 'usd'
-    )
+    current_user.update_attributes!(role: 'premium', stripe_customer_id: customer.id)
 
-    flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-    redirect_to user_path(current_user)
+    flash[:notice] = "Thanks for upgrading to a premium account!"
+    redirect_to current_user
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_charge_path
+    redirect_to :back
+  end
+
+  def cancel_subscription
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+    if customer.subscriptions.first.delete
+      current_user.update_attributes!(role: 'standard')
+      flash[:notice] = "You have downgraded to a free standard account."
+      redirect_to current_user
+    else
+      flash[:error] = "Something went wrong. Please try again."
+      redirect_to :back
+    end
   end
 end

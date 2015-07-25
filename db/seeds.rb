@@ -28,16 +28,15 @@ users = User.all
 
 # Create Categories
 10.times do
-  category = Category.new(
+  Category.create(
     name: Faker::Lorem.word,
     )
-  category.save!
 end
 categories = Category.all
 
 # Create Photos
 50.times do
-  photo = Photo.new(
+  Photo.create(
     url: 'http://placehold.it/360x240',
     win: rand(50),
     loss: rand(50),
@@ -45,19 +44,17 @@ categories = Category.all
     user: users.sample,
     category: categories.sample
     )
-  photo.save!
 end
 photos = Photo.all
 
 # Create Challenges
 10.times do
   n = categories.sample.id
-  challenge = Challenge.new(
+  Challenge.create(
     challenger: photos.select{|photo| photo.category_id == n}.sample,
     challenged: photos.select{|photo| photo.category_id == n}.sample,
     length: (rand(2)+1)*6
     )
-  challenge.save!
 end
 challenges = Challenge.all
 

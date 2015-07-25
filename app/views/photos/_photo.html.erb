@@ -1,13 +1,15 @@
-<div class="col-sm-4 clearfix inline-block">
+<div class="col-md-4 col-sm-6 clearfix inline-block">
   <%= link_to photo do %>
-    <% if photo.url.url.nil? %>
-      <img src="http://placehold.it/360x240" alt="Photo" class="img-rounded img-responsive">
+    <% if photo.url? %>
+      <%= image_tag(photo.url.small, alt: photo.user.name, class: 'img-rounded img-responsive') %>
     <% else %>
-      <%= image_tag(photo.url.small, alt: photo.category.name, class: 'img-rounded img-responsive') %>
+      <img src="http://placehold.it/360x240" alt="Photo" class="img-rounded img-responsive">
     <% end %>
   <% end %>
   <small>
-    <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+    <% unless photo.category.nil? %>
+      <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+    <% end %>
     <span class="pull-right">Photo by: <%= link_to photo.user.name, photo.user %></span>
   </small>
 </div>

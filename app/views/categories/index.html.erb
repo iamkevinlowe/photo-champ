@@ -1,1 +1,24 @@
+<% if policy(@category).new? %>
+  <div class="row text-color-primary mtl">
+    <div class="col-md-12 text-right">
+      <%= form_for @category, html: { class: 'form-inline' } do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "Create a new category:" %>
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Enter category name' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Create", class: 'btn btn-default' %>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+  <hr class="mtl">
+<% end %>
+
 <%= render partial: @categories %>
+<div class="row">
+  <div class="col-md-12">
+    <%= will_paginate @categories, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
+  </div>
+</div>

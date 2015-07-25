@@ -1,3 +1,33 @@
+<%= content_for :stripe do %>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript">
+    // This identifies your website in the createToken call below
+    Stripe.setPublishableKey("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
+    jQuery(function($) {
+      $('#charges_form').submit(function(event) {
+        var $form = $(this);
+
+        // Disable the submit button to prevent repeated clicks
+        $form.find('input[type="submit"]').prop('disabled', true);
+
+        Stripe.card.createToken($form, function  (status, response) {
+          if (response.error) {
+            alert(response.error.message);
+            $form.find('input[type="submit"]').prop('disabled', false);
+          } else {
+            var token = response.id;
+            $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+            $form.get(0).submit();
+          };
+        });
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+  </script>
+<% end -%>
+
 <h2 class="text-color-primary">Edit <%= resource_name.to_s.humanize %></h2>
 
 <div class="row">
@@ -37,52 +67,78 @@
   </div>
 </div>
 
-<% if resource.role == 'standard' %>
-  <div class="row">
+<div class="row">
+  <% if resource.role == 'standard' %>
+
     <h3 class="text-color-primary">Premium Upgrade</h3>
     <div class="col-md-8">
 
-      <div class="form-group">
-        <%= text_field_tag :card_number, nil, class: 'form-control', 'data-stripe' => 'number', placeholder: "Enter credit card number" %>
-      </div>
+      <%= form_tag charges_path, method: :post, id: 'charges_form' do %>
 
-      <div class="form-group clearfix">
-        <div class="pull-left">
-          <%= text_field_tag :card_verification, nil, class: 'form-control', 'data-stripe' => 'cvv', placeholder: "Enter CVC number" %>
+        <div class="form-group">
+          <%= text_field_tag "", nil, class: 'form-control', 'data-stripe' => 'number', placeholder: "Enter credit card number" %>
         </div>
 
+        <div class="form-group clearfix">
+          <div class="pull-left">
+            <%= text_field_tag "", nil, class: 'form-control', 'data-stripe' => 'cvv', placeholder: "Enter CVC number" %>
+          </div>
+
+          <div class="pull-right">
+            <%= label_tag "Card_Expiration", nil, required: true, class: 'text-color-primary' %>
+            <%= select_tag "", options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, 'data-stripe' => 'exp-month', class: 'span2' %>
+            <%= select_tag "", options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, 'data-stripe' => 'exp-year', class: 'span1' %>
+          </div>
+        </div>
+      
         <div class="pull-right">
-          <%= label_tag "Card_Expiration", nil, required: true, class: 'text-color-primary' %>
-          <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, 'data-stripe' => 'exp-month', class: 'span2' %>
-          <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, 'data-stripe' => 'exp-year', class: 'span1' %>
+          <%= submit_tag "Submit", class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">Premium Account</h4>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li>$10/yr membership</li>
+            <li>20 photo uploads</li>
+            <li>Create and update categories</li>
+            <li>More features soon...</li>
+          </ul>
         </div>
       </div>
-    
-      <div class="pull-right">
-        <%= submit_tag "Submit", class: 'btn btn-default' %>
-      </div>
     </div>
-    <div class="col-md-4">
-      <ul>
-        <li>Low cost membership</li>
-        <li>20 photo uploads</li>
-        <li>Challenge any user</li>
-        <li>Create new categories</li>
-      </ul>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
+
+<hr>
 
 <div class="row">
-  <h3 class="text-color-primary">Cancel my account</h3>
+  <h3 class="text-color-primary">Account changes</h3>
   <div class="col-md-8">
 
+    <% if resource.role == 'premium' %>
+      <div class="form-group">
+        <%= link_to "Cancel membership", cancel_subscription_path, data: { confirm: "Your account will be downgraded to a standard account." }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+
     <div class="form-group">
-      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
+      <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Your account will be deleted." }, method: :delete, class: 'btn btn-danger' %>
     </div>
-    
+  </div>
+</div>
+
+<hr>
+
+<div class="row mtl">
+  <div class="col-md-8">
     <div class="form-group">
-      <%= link_to "Back", :back %>
+      <%= link_to "Back", :back, class: 'btn btn-default' %>
     </div>
   </div>
 </div>

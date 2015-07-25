@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery.countdown
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
