@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725155353) do
+ActiveRecord::Schema.define(version: 20150728192148) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 20150725155353) do
     t.boolean  "completed"
     t.datetime "ends_at"
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "photo_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["photo_id"], name: "index_comments_on_photo_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["photo_id"], name: "index_favorites_on_photo_id"
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "url"

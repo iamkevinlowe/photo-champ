@@ -22,6 +22,17 @@
 
 <div class="row text-color-primary">
   <div class="col-sm-12">
+    <h3>Favorite Photos</h3>
+    <% if @favorites.any? %>
+      <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
+    <% end %>
+  </div>
+</div>
+
+<hr class="mtl">
+
+<div class="row text-color-primary">
+  <div class="col-sm-12">
     <h3>My Photos</h3>
     <% if @photos.any? %>
       <%= render partial: @photos %>

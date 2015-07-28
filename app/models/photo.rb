@@ -4,7 +4,8 @@ class Photo < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :category
-  # has_many :challenges
+  has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   after_initialize :default_record
 

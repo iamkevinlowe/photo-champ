@@ -1,0 +1,12 @@
+<p>
+  <%= comment.body %>
+  <% if policy(comment).destroy? %>
+    <%= link_to [comment.photo, comment], method: :delete do %>
+      <span class="glyphicon glyphicon-remove"></span>
+    <% end %>
+  <% end %>
+  <br>
+  <small>
+    <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
+  </small>
+</p>

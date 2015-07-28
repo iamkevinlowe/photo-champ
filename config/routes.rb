@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :charges, only: [:create]
   get 'cancel_subscription' => 'charges#cancel_subscription'
   resources :categories, except: [:new, :edit]
-  resources :photos, except: [:index]
+  resources :photos, except: [:index] do
+    resources :comments, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
+  end
   resources :challenges, only: [:show, :new, :create]
   get 'vote' => 'challenges#vote'
 

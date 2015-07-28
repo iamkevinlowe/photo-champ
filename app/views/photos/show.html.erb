@@ -11,10 +11,10 @@
 <div class="row text-color-primary">
   <div class="col-xs-4">
     <h5><%= @photo.category.name.capitalize %></h5>
+    <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
     <% if policy(@challenge).new? %>
       <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
     <% end %>
-    <%= link_to "Button 2", "#", class: 'btn btn-default' %>
   </div>
 
   <div class="col-xs-4 text-center">
@@ -41,3 +41,17 @@
     <h3>Comments</h3>
   </div>
 </div>
+
+<div class="row text-color-primary">
+  <div class="col-xs-12">
+    <%= render partial: @comments %>
+  </div>
+</div>
+
+<% if policy(@comment).create? %>
+  <div class="row text-color-primary">
+    <div class="col-xs-12">
+      <%= render partial: 'comments/form', locals: { comment: @comment } %>
+    </div>
+  </div>
+<% end %>
