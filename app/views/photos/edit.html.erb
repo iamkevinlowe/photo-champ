@@ -1,0 +1,17 @@
+<div class="row text-color-primary">
+  <div class="col-sm-4">
+    <h3>Edit Photo</h3>
+  </div>
+
+  <div class="col-sm-8 text-right mtl">
+    <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
+  </div>
+</div>
+
+<hr class="mtl">
+
+<div class="row mtl">
+  <div class="col-sm-12">
+    <%= image_tag(@photo.url, alt: @photo.name, class: 'img-responsive middle') %>
+  </div>
+</div>

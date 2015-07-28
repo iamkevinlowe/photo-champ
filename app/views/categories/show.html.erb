@@ -1,0 +1,21 @@
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <h3>
+      <% if policy(@category).edit? %>
+        <%= best_in_place @category, :name %>
+      <% else %>
+        <%= @category.name.capitalize %>
+      <% end %>
+    </h3>
+    <% if policy(@category).destroy? %>
+      <%= link_to "Delete", @category, method: :delete, data: { confirm: "\"#{@category.name}\" will be deleted" }, class: 'btn btn-danger mbm' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <div class="col-md-12">
+    <%= render partial: @photos %>
+    <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
+  </div>
+</div>

@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "jquery.countdown";
+
+html, body {
+  background: #eee;
+}
+
+.nav {
+  margin-top: 9px
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.mtl {
+  margin-top: 20px;
+}
+
+.file-mtm {
+  margin-top: 14px;
+}
+
+.mbl {
+  margin-bottom: 20px;
+}
+
+.mbm {
+  margin-bottom: 10px;
+}
+
+.ptl {
+  margin-top: 20px;
+}
+
+hr {
+  margin: 0;
+  border-top: 1px solid #ddd;
+}
+
+.text-color-primary {
+  color: #777;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.middle {
+  display: block;
+  margin: 0 auto;
+}
+
+.is-countdown {
+  border: 0;
+  background-color: #eee;
+}
+
+.fb-share-button {
+  vertical-align: top;
+}

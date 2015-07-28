@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @challenge.challenged.user.name %></h1>
+    <p>
+      <%= @challenge.challenger.user.name %> wants to challenge your photo <%= @challenge.challenged.name %>. The challenge will last <%= @challenge.length %> hours. Do you accept the invitation?
+    </p>
+    <p>
+      Click <%= "this link", @challenge.url %> to view the challenge.
+    </p>
+  </body>
+</html>
