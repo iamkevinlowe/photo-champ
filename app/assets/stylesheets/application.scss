@@ -34,6 +34,10 @@ html, body {
   margin-top: 20px;
 }
 
+.file-mtm {
+  margin-top: 14px;
+}
+
 .mbl {
   margin-bottom: 20px;
 }
@@ -52,7 +56,7 @@ hr {
 }
 
 .text-color-primary {
-  color: #aaa;
+  color: #777;
 }
 
 .inline-block {
@@ -62,4 +66,13 @@ hr {
 .middle {
   display: block;
   margin: 0 auto;
+}
+
+.is-countdown {
+  border: 0;
+  background-color: #eee;
+}
+
+.fb-share-button {
+  vertical-align: top;
 }

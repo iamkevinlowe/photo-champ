@@ -1,7 +1,7 @@
 <div class="row mtl text-color-primary">
   <div class="col-xs-12 clearfix">
     <% if @photo.url? %>
-      <%= image_tag(@photo.url, alt: @photo.user.name, class: 'img-rounded img-responsive') %>
+      <%= image_tag(@photo.url, alt: @photo.name, class: 'img-rounded img-responsive') %>
     <% else %>
       <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
     <% end %>
@@ -10,8 +10,10 @@
 
 <div class="row text-color-primary">
   <div class="col-xs-4">
-    <h5><%= @photo.category.name.capitalize unless @photo.category.nil? %></h5>
-    <%= link_to "Button 1", "#", class: 'btn btn-default' %>
+    <h5><%= @photo.category.name.capitalize %></h5>
+    <% if policy(@challenge).new? %>
+      <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
+    <% end %>
     <%= link_to "Button 2", "#", class: 'btn btn-default' %>
   </div>
 

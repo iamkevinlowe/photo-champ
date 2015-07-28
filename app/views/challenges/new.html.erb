@@ -1,0 +1,64 @@
+<div class="row text-color-primary">
+  <div class="col-sm-12">
+    <h3>Create a Challenge!</h3>
+  </div>
+</div>
+
+<%= form_for @challenge do |f| %>
+  <%= f.hidden_field :challenged_id, value: @challenged_photo.id %>
+  <div class="row text-color-primary mtl">
+    <div class="col-sm-6 form-inline">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.select :challenger_id, @challenger_photos.pluck(:name, :id), {}, { class: 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.label :length %>
+        <%= f.select :length, @challenge_length_options, {}, { class: 'form-control' } %>
+      </div>
+    </div>
+    <div class="col-sm-6 text-center">
+      <h4><%= @challenged_photo.name %></h4>
+    </div>
+  </div>
+
+  <div class="row text-color-primary mtl">
+    <div class="col-sm-6 challenge-preview">
+      <!-- I want javascript to render image when select is changed  -->
+      <img class="img-rounded img-responsive"/>
+    </div>
+
+    <div class="col-sm-6">
+      <% if @challenged_photo.url? %>
+        <%= image_tag(@challenged_photo.url.challenge, alt: @challenged_photo.name, class: 'img-rounded img-responsive') %>
+      <% else %>
+        <img src="http://placehold.it/550x367" alt="Photo" class="img-rounded img-responsive">
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row text-color-primary mtl">
+    <div class="col-sm-12 text-right">
+      <div class="form-group">
+        <%= f.submit "Challenge!", class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(function() {
+    initPage();
+  });
+
+  $(window).bind('page:change', function() {
+    initPage();
+  });
+
+  function initPage() {
+    $('#challenge_challenger_id').change(function() {
+      var src = $(this).val();
+    
+    });
+  }
+</script>

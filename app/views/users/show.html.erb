@@ -12,8 +12,8 @@
 <div class="row text-color-primary">
   <div class="col-sm-12">
     <h3>Current Challenges</h3>
-    <% if @challenge_photos.any? %>
-      <%= render partial: 'photos/photo', collection: @challenge_photos, as: :photo %>
+    <% if @challenges.any? %>
+      <%= render partial: @challenges %>
     <% end %>
   </div>
 </div>
@@ -27,7 +27,7 @@
       <%= render partial: @photos %>
     <% end %>
     <% if policy(@photo).new? && @user == current_user %>
-      <div class="col-sm-4 inline-block">
+      <div class="col-md-4 col-sm-6 inline-block">
         <%= link_to new_photo_path do %>
           <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
         <% end %>

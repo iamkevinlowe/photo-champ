@@ -10,48 +10,48 @@
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <% if @top_photos[0].url? %>
-        <%= image_tag(@top_photos[0].url.feature, alt: @top_photos[0].user.name, class: 'middle') %>
+        <%= image_tag(@top_photos[0].url.feature, alt: @top_photos[0].name, class: 'middle') %>
       <% else %>
         <img src="http://placehold.it/960x640" alt="First" class="middle">
       <% end %>  
       <div class="carousel-caption">
-        <p><%= @top_photos[0].category.name.capitalize unless @top_photos[0].category.nil? %></p>
+        <p><%= @top_photos[0].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[0].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <% if @top_photos[1].url? %>
-        <%= image_tag(@top_photos[1].url.feature, alt: @top_photos[1].user.name, class: 'middle') %>
+        <%= image_tag(@top_photos[1].url.feature, alt: @top_photos[1].name, class: 'middle') %>
       <% else %>
         <img src="http://placehold.it/960x640" alt="Second" class="middle">
       <% end %> 
       <div class="carousel-caption">
-        <p><%= @top_photos[1].category.name.capitalize unless @top_photos[1].category.nil? %></p>
+        <p><%= @top_photos[1].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[1].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <% if @top_photos[2].url? %>
-        <%= image_tag(@top_photos[2].url.feature, alt: @top_photos[2].user.name, class: 'middle') %>
+        <%= image_tag(@top_photos[2].url.feature, alt: @top_photos[2].name, class: 'middle') %>
       <% else %>
         <img src="http://placehold.it/960x640" alt="Third" class="middle">
       <% end %> 
       <div class="carousel-caption">
-        <p><%= @top_photos[2].category.name.capitalize unless @top_photos[2].category.nil? %></p>
+        <p><%= @top_photos[2].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[2].user.name %></p>
       </div>
     </div>
 
     <div class="item">
       <% if @top_photos[3].url? %>
-        <%= image_tag(@top_photos[3].url.feature, alt: @top_photos[3].user.name, class: 'middle') %>
+        <%= image_tag(@top_photos[3].url.feature, alt: @top_photos[3].name, class: 'middle') %>
       <% else %>
         <img src="http://placehold.it/960x640" alt="Fourth" class="middle">
       <% end %> 
       <div class="carousel-caption">
-        <p><%= @top_photos[3].category.name.capitalize unless @top_photos[3].category.nil? %></p>
+        <p><%= @top_photos[3].category.name.capitalize %></p>
         <p>Image by: <%= @top_photos[3].user.name %></p>
       </div>
     </div>

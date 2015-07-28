@@ -10,16 +10,16 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   process resize_to_fit: [1440, 1440]
 
-  version :small do
-    process resize_to_fit: [360, 360]
+  version :feature do
+    process resize_to_fit: [960, 960]
   end
 
-  version :challenge do
+  version :challenge, from_version: :feature do
     process resize_to_fit: [550, 550]
   end
 
-  version :feature do
-    process resize_to_fit: [960, 960]
+  version :small, from_version: :challenge do
+    process resize_to_fit: [360, 360]
   end
 
   def extension_white_list

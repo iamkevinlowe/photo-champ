@@ -1,40 +1,47 @@
-<% javascript_include_tag 'upload-preview.js' %>
+<% if policy(@category).create? %>
+  <%= render partial: 'categories/form', locals: { category: @category } %>
+<% end %>
 
 <div class="row text-color-primary">
-  <div class="col-sm-12">
+  <div class="col-sm-4">
     <h3>Upload Photo</h3>
   </div>
-</div>
 
-<div class="row text-color-primary">
-  <%= form_for @photo do |f| %> 
-
-    <div class="col-sm-4">
-      <div class="form-group form-inline">
-        <%= f.label :category %>
-        <%= f.select(:category_id, options_for_select(@categories), {}, { class: 'form-control' }) %>
-      </div>
-    </div>
-
-    <div class="col-sm-4">
-      <div class="form-group">
-        <%= f.file_field :url %>
-      </div>
-    </div>
-
-    <div class="col-sm-4">
-      <%= f.submit "Upload", class: 'btn btn-default pull-right' %>
-    </div>
-  <% end %>  
-</div>
-
-<hr>
-
-<div class="row mtl">
-  <div class="col-sm-12">
-    <div class="upload-preview">
-      <!-- Created an upload_preview javascript -->
-      <img class="img-responsive middle"/>
-    </div>
+  <div class="col-sm-8 text-right mtl">
+     <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
   </div>
 </div>
+
+<hr class="mtl">
+
+<div class="row mtl">
+  <div class="col-sm-12 upload-preview">
+    <!-- Created an upload_preview javascript -->
+    <img class="img-rounded img-responsive middle"/>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    initPage();
+  });
+
+  $(window).bind('page:change', function() {
+    initPage();
+  });
+
+  function initPage() {
+    var preview = $(".upload-preview img");
+    
+    $("#photo_url").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+  }
+</script>

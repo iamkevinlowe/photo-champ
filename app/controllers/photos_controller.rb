@@ -2,12 +2,14 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
+    @challenge = Challenge.new(challenged_id: @photo.id)
     authorize @photo
   end
 
   def new
     @photo = Photo.new
     @categories = Category.all.pluck(:name, :id)
+    @category = Category.new
     authorize @photo
   end
 
@@ -56,6 +58,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:url, :win, :loss, :tie, :category_id)
+    params.require(:photo).permit(:url, :win, :loss, :tie, :category_id, :name)
   end
 end

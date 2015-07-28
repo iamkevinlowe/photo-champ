@@ -8,13 +8,20 @@ class Photo < ActiveRecord::Base
 
   after_initialize :default_record
 
-  scope :top_photos, -> (limit) { Photo.where("win > loss").take(limit) }
+  scope :top_photos, -> (limit) { 
+    Photo.where("win > loss").take(limit) 
+  }
+
   scope :challenge_photos, -> (user) { 
     photo_ids = user.photo_ids
     Photo.find(
-      Challenge.where(completed: false, challenger_id: photo_ids).pluck(:challenger_id) +
-      Challenge.where(completed: false, challenged_id: photo_ids).pluck(:challenged_id)
+      Challenge.challenger_challenges(user).pluck(:challenger_id) +
+      Challenge.challenged_challenges(user).pluck(:challenged_id)
     )
+  }
+
+  scope :new_challenge_photos, -> (user, challenged) { 
+    Photo.where("user_id = ? AND category_id = ?", user.id, challenged.category_id)
   }
 
   private

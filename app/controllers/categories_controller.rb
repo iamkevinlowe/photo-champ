@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
     else
       flash[:error] = "Something went wrong. Please try again."
     end
-    redirect_to categories_path
+    redirect_to :back
   end
 
   def update

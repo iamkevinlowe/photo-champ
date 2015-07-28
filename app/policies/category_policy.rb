@@ -1,21 +1,13 @@
 class CategoryPolicy < ApplicationPolicy
 
-  def new?
+  def create?
     if user.present?
       user.role == 'premium' || user.role == 'admin'
     end
   end
 
-  def create?
-    new?
-  end
-
-  def edit?
-    new?
-  end
-
   def update?
-    new?
+    create?
   end
 
   def destroy?
