@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
   after_initialize :default_record
 
   scope :top_photos, -> (limit) { 
-    Photo.where("win > loss").take(limit) 
+    Photo.where("win > loss").includes(:category, :user) .take(limit)
   }
 
   scope :challenge_photos, -> (user) { 

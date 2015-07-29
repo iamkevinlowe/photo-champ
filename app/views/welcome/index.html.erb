@@ -17,7 +17,7 @@
             <img src="http://placehold.it/960x640" alt="Photo" class="middle">
           <% end %>  
           <div class="carousel-caption">
-            <p><%= photo.category.name.capitalize %></p>
+            <p><%= photo.name? ? photo.name.capitalize : photo.category.name.capitalize %></p>
             <p>Photo by: <%= photo.user.name %></p>
           </div>
         </div>

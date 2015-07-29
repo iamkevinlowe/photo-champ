@@ -11,6 +11,8 @@ class ChallengePolicy < ApplicationPolicy
   end
 
   def vote?
-    record.ends_at > Time.now
+    unless record.completed?
+      record.ends_at? && record.ends_at > Time.now
+    end
   end
 end

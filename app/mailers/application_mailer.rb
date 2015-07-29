@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "do_not_reply@photocha.mp"
+  default from: "hello@photocha.mp"
   layout 'mailer'
 end

@@ -13,7 +13,7 @@
       <% elsif @result == 'tie' %>
         Draw! Your <%= link_to "photo", @photo %> tied.
       <% end %>
-      Start a new <%= link_to "challenge", category_path(@photo.category) %>.
+      Start a new <%= link_to "challenge", category_url(@photo.category) %>.
     </p>
     <h3>Current photo record:</h3>
     <p>

@@ -13,7 +13,7 @@
 
 // Countdown script
 $(function(){
-  var timeLeft = new Date(<%= (@challenge.created_at + @challenge.length.hours).to_f * 1000 %>);
+  var timeLeft = new Date(<%= (@challenge.ends_at? ? @challenge.ends_at : 0).to_f * 1000 %>);
   $(".countdown").countdown({until: timeLeft, compact: true});
 });
 </script>
@@ -59,7 +59,7 @@ $(function(){
     <%= link_to @challenge.challenger do %>
       <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>
-      <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { votes_challenger: true }), class: 'btn btn-default' %>
+      <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenger' }), class: 'btn btn-default' %>
   </div>
 
   <div class="col-sm-6">
@@ -67,6 +67,6 @@ $(function(){
     <%= link_to @challenge.challenged do %>
       <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>
-    <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { votes_challenged: true }), class: 'btn btn-default' %>
+    <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
   </div>
 </div>

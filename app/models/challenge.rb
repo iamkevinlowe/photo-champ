@@ -5,11 +5,11 @@ class Challenge < ActiveRecord::Base
   before_create :default_val
 
   scope :challenger_challenges, -> (user) {
-    Challenge.where(completed: false, challenger_id: user.photo_ids)
+    Challenge.where(completed: false, challenger_id: user.photo_ids).includes(:challenger, :challenged)
   }
 
   scope :challenged_challenges, -> (user) {
-    Challenge.where(completed: false, challenged_id: user.photo_ids)
+    Challenge.where(completed: false, challenged_id: user.photo_ids).includes(:challenger, :challenged)
   }
 
   def self.send_results
@@ -32,42 +32,49 @@ class Challenge < ActiveRecord::Base
     return true if self.completed? && self.votes_challenger == self.votes_challenged
   end
 
+  def start!
+    self.update_attribute(:ends_at, Time.now + length.hours)
+  end
+
   def complete!
     self.update_attributes(completed: true)
     update_scores
     results_email
   end
 
+  def vote_for(someone)
+    if someone == 'challenger'
+      self.update_attribute(:votes_challenger, votes_challenger + 1)
+    elsif someone == 'challenged'
+      self.update_attribute(:votes_challenged, votes_challenged + 1)
+    end
+  end
+
   private
 
   def default_val
+    self.completed = false
     self.votes_challenger = 0
     self.votes_challenged = 0
-    self.completed = false
-    self.ends_at = Time.now + self.length.hours
   end
 
   def update_scores
     if draw?
-      challenger.tie += 1
-      challenger.save!
-      challenged.tie += 1
-      challenged.save!
+      challenger.update_attribute(:tie, tie + 1)
+      challenged.update_attribute(:tie, tie + 1)
     else
-      winner.win += 1
-      winner.save!
-      loser.loss += 1
-      loser.save!
+      winner.update_attribute(:win, win + 1)
+      loser.update_attribute(:loss, loss + 1)
     end
   end
 
   def results_email
     if draw?
-      ChallengeMailer.results_email(self.challenger, 'tie')
-      ChallengeMailer.results_email(self.challenged, 'tie')
+      ChallengeMailer.results_email(self.challenger, 'tie').deliver
+      ChallengeMailer.results_email(self.challenged, 'tie').deliver
     else
-      ChallengeMailer.results_email(winner, 'win')
-      ChallengeMailer.results_email(loser, 'lose')
+      ChallengeMailer.results_email(winner, 'win').deliver
+      ChallengeMailer.results_email(loser, 'lose').deliver
     end
   end
 end

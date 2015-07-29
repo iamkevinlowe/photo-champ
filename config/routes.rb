@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :challenges, only: [:show, :new, :create]
   get 'vote' => 'challenges#vote'
+  get 'accept' => 'challenges#accept'
 
   root to: 'welcome#index'
 
