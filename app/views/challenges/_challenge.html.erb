@@ -1,11 +1,16 @@
-<div class="col-md-4 col-sm-6 clearfix inline-block">
+<div class="col-md-4 col-sm-6 clearfix inline-block mbm">
   <%= link_to challenge do %>
     <% if challenge.challenger.url? %>
       <%= image_tag(challenge.challenger.url.small, alt: challenge.challenger.name, class: 'img-rounded img-responsive') %>
     <% else %>
       <img src="http://placehold.it/360x240" class="img-rounded img-responsive">
     <% end %>
-    <h4 class="text-center"><%= challenge.challenger.name %> vs <%= challenge.challenged.name %></h4>
+
+    <h4 class="text-center">
+      <%= challenge.challenger.name || challenge.challenger.user.name %> vs
+      <%= challenge.challenged.name || challenge.challenged.user.name %>
+    </h4>
+
     <% if challenge.challenged.url? %>
       <%= image_tag(challenge.challenged.url.small, alt: challenge.challenged.name, class: 'img-rounded img-responsive') %>
     <% else %>

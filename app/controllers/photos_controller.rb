@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   def show
     @photo = Photo.find(params[:id])
     @challenge = Challenge.new(challenged_id: @photo.id)
-    @comments = @photo.comments
+    @comments = @photo.comments.includes(:user)
     @comment = Comment.new(photo_id: @photo.id)
     authorize @photo
   end

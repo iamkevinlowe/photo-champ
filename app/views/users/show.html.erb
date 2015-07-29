@@ -1,48 +1,56 @@
 <div class="row text-color-primary">
   <div class="col-sm-12">
     <h3>Top Competitors</h3>
-    <% if @top_photos.any? %>
-      <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
-    <% end %>
   </div>
+</div>
+
+<div class="row">
+  <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
 </div>
 
 <hr class="mtl">
 
-<div class="row text-color-primary">
-  <div class="col-sm-12">
-    <h3>Current Challenges</h3>
-    <% if @challenges.any? %>
-      <%= render partial: @challenges %>
-    <% end %>
+<% if @challenges.any? %>
+  <div class="row text-color-primary">
+    <div class="col-sm-12">
+      <h3>Current Challenges</h3>
+    </div>
   </div>
-</div>
 
-<hr class="mtl">
-
-<div class="row text-color-primary">
-  <div class="col-sm-12">
-    <h3>Favorite Photos</h3>
-    <% if @favorites.any? %>
-      <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
-    <% end %>
+  <div class="row">
+    <%= render partial: @challenges %>
   </div>
-</div>
 
-<hr class="mtl">
+  <hr class="mtl">
+<% end %>
+
+<% if @favorites.any? %>
+  <div class="row text-color-primary">
+    <div class="col-sm-12">
+      <h3>Favorite Photos</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
+  </div>
+
+  <hr class="mtl">
+<% end %>
 
 <div class="row text-color-primary">
   <div class="col-sm-12">
     <h3>My Photos</h3>
-    <% if @photos.any? %>
-      <%= render partial: @photos %>
-    <% end %>
-    <% if policy(@photo).new? && @user == current_user %>
-      <div class="col-md-4 col-sm-6 inline-block">
-        <%= link_to new_photo_path do %>
-          <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
-        <% end %>
-      </div>
-    <% end %>
   </div>
+</div>
+
+<div class="row">
+  <%= render partial: @photos %>
+  <% if policy(@photo).new? && @user == current_user %>
+    <div class="col-md-4 col-sm-6 inline-block">
+      <%= link_to new_photo_path do %>
+        <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

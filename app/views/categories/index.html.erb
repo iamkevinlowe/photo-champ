@@ -2,10 +2,9 @@
   <%= render partial: 'categories/form', locals: { category: @category } %>
 <% end %>
 
-
 <%= render partial: @categories %>
-<div class="col-md-12">
-  <div class="row">
+<div class="row">
+  <div class="col-sm-12">
     <%= will_paginate @categories, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
   </div>
 </div>

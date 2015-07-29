@@ -1,0 +1,15 @@
+<div class="row text-color-primary">
+  <div class="col-sm-12">
+    <h3>Current Challenges</h3>
+  </div>
+</div>
+
+<div class="row">
+  <%= render partial: @challenges %>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= will_paginate @categories, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
+  </div>
+</div>

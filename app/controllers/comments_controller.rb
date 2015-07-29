@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     photo = Photo.find(params[:photo_id])
     comment = current_user.comments.build(comment_params)
     comment.photo_id = photo.id
-    authorize @comment
+    authorize comment
     if comment.save
       flash[:notice] = "Comment created successfully."
     else

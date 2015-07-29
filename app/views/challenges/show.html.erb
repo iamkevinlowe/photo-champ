@@ -36,13 +36,13 @@ $(function(){
 <% end %>
 
 <div class="row text-color-primary">
-  <div class="col-sm-6 inline-block">
+  <div class="col-sm-6">
     <h3><%= @challenge.challenger.category.name %> Challenge</h3>
   </div>
-  <div class="col-sm-6 text-right pull-right inline-block mtl">
+
+  <div class="col-sm-6 text-right pull-right">
     <strong>Time Left: </strong>
-    <span class="countdown">
-    </span>
+    <span class="countdown"></span>
 
     <div id="fb-root"></div>
     <%= content_tag(:div, "", class: 'fb-share-button', data: { href: short_url(request.original_url), layout: 'button' }) %>
@@ -53,9 +53,9 @@ $(function(){
 
 <hr>
 
-<div class="row text-color-primary text-center mtl">
+<div class="row text-color-primary text-center">
   <div class="col-sm-6">
-    <h4><%= @challenge.challenger.name %></h4>
+    <h4><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
     <%= link_to @challenge.challenger do %>
       <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>
@@ -63,7 +63,7 @@ $(function(){
   </div>
 
   <div class="col-sm-6">
-    <h4><%= @challenge.challenged.name %></h4>
+    <h4><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
     <%= link_to @challenge.challenged do %>
       <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>

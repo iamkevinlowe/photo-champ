@@ -1,5 +1,5 @@
 <div class="row text-color-primary">
-  <div class="col-md-12">
+  <div class="col-sm-12">
     <h3>
       <% if policy(@category).edit? %>
         <%= best_in_place @category, :name %>
@@ -14,8 +14,6 @@
 </div>
 
 <div class="row text-color-primary">
-  <div class="col-md-12">
-    <%= render partial: @photos %>
-    <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
-  </div>
+  <%= render partial: @photos %>
+  <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
 </div>

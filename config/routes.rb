@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
   end
-  resources :challenges, only: [:show, :new, :create]
+  resources :challenges, except: [:edit, :update, :destroy]
   get 'vote' => 'challenges#vote'
   get 'accept' => 'challenges#accept'
 

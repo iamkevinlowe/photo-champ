@@ -1,5 +1,9 @@
 class ChallengesController < ApplicationController
 
+  def index
+    @challenges = Challenge.where("completed = ?", false).where.not(ends_at: nil).includes(:challenger, :challenged).paginate(page: params[:page], per_page: 12)
+  end
+
   def show
     Challenge.send_results
     @challenge = Challenge.find(params[:id])

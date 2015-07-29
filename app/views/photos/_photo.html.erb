@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-6 clearfix inline-block">
+<div class="col-md-4 col-sm-6 clearfix inline-block mbm">
   <%= link_to photo do %>
     <% if photo.url? %>
       <%= image_tag(photo.url.small, alt: photo.name, class: 'img-rounded img-responsive') %>
@@ -6,8 +6,10 @@
       <img src="http://placehold.it/360x240" alt="Photo" class="img-rounded img-responsive">
     <% end %>
   <% end %>
+
   <small>
     <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+
     <span class="pull-right">
       <% if photo.name.nil? %>
         Photo
