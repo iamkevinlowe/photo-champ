@@ -16,6 +16,7 @@ gem 'faker'
 gem 'will_paginate-bootstrap'
 gem 'best_in_place'
 gem 'jquery-turbolinks'
+gem 'sucker_punch'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

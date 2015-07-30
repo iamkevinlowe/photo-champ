@@ -5,11 +5,13 @@ class Challenge < ActiveRecord::Base
   before_create :default_val
 
   scope :challenger_challenges, -> (user) {
-    Challenge.where(completed: false, challenger_id: user.photo_ids).includes(:challenger, :challenged)
+    Challenge.active_challenges.where(challenger_id: user.photo_ids)
   }
-
   scope :challenged_challenges, -> (user) {
-    Challenge.where(completed: false, challenged_id: user.photo_ids).includes(:challenger, :challenged)
+    Challenge.active_challenges.where(challenged_id: user.photo_ids)
+  }
+  scope :active_challenges, -> {
+    Challenge.where("completed = ?", false).where.not(ends_at: nil)
   }
 
   def self.send_results
@@ -60,21 +62,21 @@ class Challenge < ActiveRecord::Base
 
   def update_scores
     if draw?
-      challenger.update_attribute(:tie, tie + 1)
-      challenged.update_attribute(:tie, tie + 1)
+      challenger.tie
+      challenged.tie
     else
-      winner.update_attribute(:win, win + 1)
-      loser.update_attribute(:loss, loss + 1)
+      winner.won
+      loser.lost
     end
   end
 
   def results_email
     if draw?
-      ChallengeMailer.results_email(self.challenger, 'tie').deliver
-      ChallengeMailer.results_email(self.challenged, 'tie').deliver
+      ChallengeMailer.results_email(self.challenger, 'tie').deliver_later
+      ChallengeMailer.results_email(self.challenged, 'tie').deliver_later
     else
-      ChallengeMailer.results_email(winner, 'win').deliver
-      ChallengeMailer.results_email(loser, 'lose').deliver
+      ChallengeMailer.results_email(winner, 'win').deliver_later
+      ChallengeMailer.results_email(loser, 'lose').deliver_later
     end
   end
 end

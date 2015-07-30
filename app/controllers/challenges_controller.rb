@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
 
   def index
-    @challenges = Challenge.where("completed = ?", false).where.not(ends_at: nil).includes(:challenger, :challenged).paginate(page: params[:page], per_page: 12)
+    @challenges = Challenge.active_challenges.includes(:challenger, :challenged).paginate(page: params[:page], per_page: 12)
   end
 
   def show
@@ -19,9 +19,8 @@ class ChallengesController < ApplicationController
   def create
     @challenge = Challenge.new(challenge_params)
     authorize @challenge
-    # I want to refactor this so and email gets sent and the challenged user must accept the invitation
     if @challenge.save
-      ChallengeMailer.new_challenge(@challenge).deliver
+      ChallengeMailer.new_challenge(@challenge).deliver_later
       flash[:notice] = "A challenge invitation email has been sent to the user!"
       redirect_to @challenge
     else
