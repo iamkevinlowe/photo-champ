@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
       redirect_to @photo
     else
       flash[:error] = "Something went wrong. Please try again."
-      render :new
+      redirect_to :back
     end
   end
 

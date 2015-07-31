@@ -26,6 +26,7 @@ $(function(){
   <%= tag(:meta, property: 'og:description', content: "Vote for your favorite photo. Share the challenge and see who comes out on top!") %>
   <%= tag(:meta, property: 'og:site_name', content: "PhotoCha.mp") %>
   <%= tag(:meta, property: 'og:image', content: @challenge.challenger.url.challenge.url) %>
+  <%= tag(:meta, property: 'og:image', content: @challenge.challenged.url.challenge.url) %>
 
   <!-- Twitter meta tags -->
   <%= tag(:meta, property: 'twitter:card', content: "summary") %>
@@ -36,11 +37,11 @@ $(function(){
 <% end %>
 
 <div class="row text-color-primary">
-  <div class="col-sm-6">
+  <div class="col-xs-6">
     <h3><%= @challenge.challenger.category.name %> Challenge</h3>
   </div>
 
-  <div class="col-sm-6 text-right pull-right">
+  <div class="col-xs-6 text-right pull-right">
     <strong>Time Left: </strong>
     <span class="countdown"></span>
 
@@ -48,6 +49,23 @@ $(function(){
     <%= content_tag(:div, "", class: 'fb-share-button', data: { href: short_url(request.original_url), layout: 'button' }) %>
 
     <%= link_to "Tweet", "https://twitter.com/share", class: 'twitter-share-button', data: { url: short_url(request.original_url), text: 'Vote for the best photo!', count: 'none', hashtags: 'photochamp' } %>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <div class="col-sm-12 text-center">
+    <% if !@challenge.ends_at? %>
+      <hr>
+      <h5>The challenge hasn't been accepted yet!</h5>
+    <% elsif @challenge.completed? %>
+      <% if @challenge.draw? %>
+        <hr>
+        <h5>It was a draw!</h5>
+      <% else %>
+        <hr>
+        <h5><%= @challenge.winner.name %> is the winner!</h5>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -59,7 +77,10 @@ $(function(){
     <%= link_to @challenge.challenger do %>
       <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>
+
+    <% if @challenge.ends_at? && !@challenge.completed? %>
       <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenger' }), class: 'btn btn-default' %>
+    <% end %>
   </div>
 
   <div class="col-sm-6">
@@ -67,6 +88,9 @@ $(function(){
     <%= link_to @challenge.challenged do %>
       <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
     <% end %>
-    <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
+
+    <% if @challenge.ends_at? && !@challenge.completed? %>
+      <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
+    <% end %>
   </div>
 </div>

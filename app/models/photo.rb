@@ -7,6 +7,11 @@ class Photo < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :name, presence: true
+  validates :url, presence: true
+  validates :user, presence: true
+  validates :category, presence: true
+
   after_initialize :default_record
 
   scope :top_photos, -> (limit) { 
@@ -33,6 +38,10 @@ class Photo < ActiveRecord::Base
 
   def tied
     self.update_attribute(:tie, tie + 1)
+  end
+
+  def in_challenge?
+    Challenge.active_challenges.where("challenger_id = ? OR challenged_id = ?", self.id, self.id).any?
   end
 
   private

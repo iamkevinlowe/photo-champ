@@ -2,6 +2,7 @@
   <div class="col-sm-12">
     <h3>
       <% if policy(@category).edit? %>
+      <span class="glyphicon glyphicon-pencil"></span>
         <%= best_in_place @category, :name %>
       <% else %>
         <%= @category.name.capitalize %>

@@ -19,11 +19,17 @@
 @import "jquery.countdown";
 
 html, body {
-  background: #eee;
+  background: #f7f7f7;
 }
 
-.nav {
-  margin-top: 9px
+.navbar {
+  background-color: #f7f7f7;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu {
+  background-color: #eee;
 }
 
 .strong {
@@ -70,7 +76,7 @@ hr {
 
 .is-countdown {
   border: 0;
-  background-color: #eee;
+  background-color: #f7f7f7;
 }
 
 .fb-share-button {
@@ -79,4 +85,8 @@ hr {
 
 .favorite {
   font-size: x-large;
+}
+
+span.glyphicon-pencil {
+  font-size: small;
 }
