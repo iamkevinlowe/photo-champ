@@ -34,8 +34,13 @@
     <% if policy(@photo).edit? %>
       <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
     <% end %>
+
     <% if policy(@photo).destroy? %>
       <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Photo will be deleted" }, class: 'btn btn-default' %>
+    <% end %>
+
+    <% if @photo.in_challenge? %>
+      <h5>Currently in a challenge</h5>
     <% end %>
   </div>
 </div>

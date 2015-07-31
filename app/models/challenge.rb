@@ -14,6 +14,9 @@ class Challenge < ActiveRecord::Base
     Challenge.where("completed = ?", false).where.not(ends_at: nil)
   }
 
+  validates :challenger_id, presence: true
+  validates :challenged_id, presence: true
+
   def self.send_results
     Challenge.where("ends_at < ? AND completed = ?", Time.now, false).each{ |challenge| challenge.complete! }
   end
@@ -35,6 +38,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def start!
+    ChallengeMailer.challenge_accepted(self).deliver_later
     self.update_attribute(:ends_at, Time.now + length.hours)
   end
 

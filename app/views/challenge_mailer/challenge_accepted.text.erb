@@ -1,0 +1,3 @@
+Hi <%= @challenge.challenger.user.name %>,
+
+<%= @challenge.challenged.user.name %> accepts your challenge and is now live.  <%= link_to "Click here", challenge_url(id: @challenge.id) %> to view the challenge and remember to share the link!
