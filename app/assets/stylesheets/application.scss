@@ -26,6 +26,7 @@ html, body {
   background-color: #f7f7f7;
   border: 0;
   border-bottom: 1px solid #ddd;
+  border-radius: 0;
 }
 
 .dropdown-menu {
@@ -85,6 +86,7 @@ hr {
 
 .favorite {
   font-size: x-large;
+  color: #337ab7;
 }
 
 span.glyphicon-pencil {

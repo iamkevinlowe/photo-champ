@@ -16,21 +16,12 @@
 
 <div class="row mtl">
   <div class="col-sm-12 upload-preview">
-    <!-- Javascript displays photo before upload -->
     <img class="img-rounded img-responsive middle"/>
   </div>
 </div>
 
 <script>
-  $(function() {
-    initPage();
-  });
-
-  $(window).bind('page:change', function() {
-    initPage();
-  });
-
-  function initPage() {
+  $(document).ready(function() {
     var preview = $(".upload-preview img");
     
     $("#photo_url").change(function(event){
@@ -43,5 +34,5 @@
        };
        reader.readAsDataURL(file);
     });
-  }
+  });
 </script>

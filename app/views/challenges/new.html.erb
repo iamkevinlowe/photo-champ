@@ -10,7 +10,7 @@
     <div class="col-sm-6 form-inline">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.select :challenger_id, @challenger_photos.pluck(:name, :id), {}, { class: 'form-control' } %>
+        <%= f.select :challenger_id, @challenger_photos.map{ |photo| [photo.name, photo.url.challenge.url] }, {}, { class: 'form-control' } %>
       </div>
 
       <div class="form-group">
@@ -26,7 +26,6 @@
 
   <div class="row mtl">
     <div class="col-sm-6 challenge-preview">
-      <!-- I want javascript to render image when select is changed  -->
       <img src="http://placehold.it/550x367" alt="Photo" class="img-rounded img-responsive">
     </div>
 
@@ -49,18 +48,16 @@
 <% end %>
 
 <script>
-  $(function() {
-    initPage();
-  });
+  $(document).ready(function() {
+    var $sel = $("select#challenge_challenger_id")
+    preview($sel.val());
 
-  $(window).bind('page:change', function() {
-    initPage();
-  });
-
-  function initPage() {
-    $('#challenge_challenger_id').change(function() {
-      var src = $(this).val();
-    
+    $sel.change(function() {
+      preview($(this).val());
     });
-  }
+  });
+
+  function preview(url) {
+    $("div.challenge-preview img").attr("src", url);
+  };
 </script>

@@ -17,6 +17,7 @@
 <div class="row text-color-primary">
   <div class="col-xs-4">
     <h5><%= @photo.category.name.capitalize %></h5>
+
     <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
     <% if policy(@challenge).new? %>
       <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
@@ -31,13 +32,16 @@
 
   <div class="col-xs-4 text-right">
     <h5>Photo by: <%= @photo.user.name %></h5>
-    <% if policy(@photo).edit? %>
-      <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
-    <% end %>
 
-    <% if policy(@photo).destroy? %>
-      <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Photo will be deleted" }, class: 'btn btn-default' %>
-    <% end %>
+    <div class="btn-group">
+      <% if policy(@photo).edit? %>
+        <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
+      <% end %>
+
+      <% if policy(@photo).destroy? %>
+        <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Photo will be deleted" }, class: 'btn btn-default' %>
+      <% end %>
+    </div>  
 
     <% if @photo.in_challenge? %>
       <h5>Currently in a challenge</h5>
@@ -54,14 +58,14 @@
 </div>
 
 <div class="row text-color-primary">
-  <div class="col-sm-12">
+  <div class="col-sm-12 js-comments">
     <%= render partial: @comments %>
   </div>
 </div>
 
 <% if policy(@comment).create? %>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 new-comment">
       <%= render partial: 'comments/form', locals: { comment: @comment } %>
     </div>
   </div>
