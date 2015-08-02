@@ -72,25 +72,37 @@ $(function(){
 <hr>
 
 <div class="row text-color-primary text-center">
-  <div class="col-sm-6">
-    <h4><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
-    <%= link_to @challenge.challenger do %>
-      <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
-    <% end %>
+  <div class="col-sm-6 no-padding-r">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="text-color-primary"><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
+        <%= link_to @challenge.challenger do %>
+          <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
+        <% end %>
+      </div>
 
-    <% if @challenge.ends_at? && !@challenge.completed? %>
-      <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenger' }), class: 'btn btn-default' %>
-    <% end %>
+      <% if @challenge.ends_at? && !@challenge.completed? %>
+        <div class="panel-body">
+          <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenger' }), class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="col-sm-6">
-    <h4><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
-    <%= link_to @challenge.challenged do %>
-      <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
-    <% end %>
-
-    <% if @challenge.ends_at? && !@challenge.completed? %>
-      <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
-    <% end %>
+  <div class="col-sm-6 no-padding-l">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="text-color-primary"><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
+        <%= link_to @challenge.challenged do %>
+          <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
+        <% end %>
+      </div>
+  
+      <% if @challenge.ends_at? && !@challenge.completed? %>
+        <div class="panel-body">      
+          <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

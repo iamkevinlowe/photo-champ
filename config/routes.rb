@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :challenges, except: [:edit, :update, :destroy]
   get 'vote' => 'challenges#vote'
   get 'accept' => 'challenges#accept'
-
   root to: 'welcome#index'
 
 end

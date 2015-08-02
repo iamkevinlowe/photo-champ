@@ -34,6 +34,9 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <li class="greet">Hello <strong><%= current_user.name %></strong></li>
+            <% end %>
             <li class="dropdown">
               <%= link_to "#", class: 'dropdown-toggle', id: 'menu-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
                 <span class="glyphicon glyphicon-menu-down"></span>

@@ -1,55 +1,57 @@
 <div class="row text-color-primary">
   <div class="col-sm-12 text-center">
-    <h3><%= @photo.name || "" %></h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="text-color-primary"><%= @photo.name || "" %></h3>
+
+        <% if @photo.url? %>
+          <%= image_tag(@photo.url, alt: @photo.name, class: 'img-rounded img-responsive') %>
+        <% else %>
+          <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
+        <% end %>
+      </div>
+
+      <div class="panel-body">
+        <div class="row text-color-primary">
+          <div class="col-xs-4">
+            <h5><%= link_to @photo.category.name.capitalize, @photo.category %></h5>
+
+            <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
+            <% if policy(@challenge).new? %>
+              <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
+            <% end %>
+          </div>
+
+          <div class="col-xs-4">
+            <h5>Wins: <%= @photo.win %></h5>
+            <h5>Losses: <%= @photo.loss %></h5>
+            <h5>Ties: <%= @photo.tie %></h5>
+          </div>
+
+          <div class="col-xs-4">
+            <h5>Photo by: <%= link_to @photo.user.name, @photo.user %></h5>
+
+            <div class="btn-group">
+              <% if policy(@photo).edit? %>
+                <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
+              <% end %>
+
+              <% if policy(@photo).destroy? %>
+                <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Photo will be deleted" }, class: 'btn btn-default' %>
+              <% end %>
+            </div>  
+
+            <% if @photo.in_challenge? %>
+              <h5>Currently in a challenge</h5>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12 clearfix">
-    <% if @photo.url? %>
-      <%= image_tag(@photo.url, alt: @photo.name, class: 'img-rounded img-responsive') %>
-    <% else %>
-      <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
-    <% end %>
-  </div>
-</div>
-
-<div class="row text-color-primary">
-  <div class="col-xs-4">
-    <h5><%= @photo.category.name.capitalize %></h5>
-
-    <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
-    <% if policy(@challenge).new? %>
-      <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
-    <% end %>
-  </div>
-
-  <div class="col-xs-4 text-center">
-    <h5>Wins: <%= @photo.win %></h5>
-    <h5>Losses: <%= @photo.loss %></h5>
-    <h5>Ties: <%= @photo.tie %></h5>
-  </div>
-
-  <div class="col-xs-4 text-right">
-    <h5>Photo by: <%= @photo.user.name %></h5>
-
-    <div class="btn-group">
-      <% if policy(@photo).edit? %>
-        <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
-      <% end %>
-
-      <% if policy(@photo).destroy? %>
-        <%= link_to "Delete", @photo, method: :delete, data: { confirm: "Photo will be deleted" }, class: 'btn btn-default' %>
-      <% end %>
-    </div>  
-
-    <% if @photo.in_challenge? %>
-      <h5>Currently in a challenge</h5>
-    <% end %>
-  </div>
-</div>
-
-<hr>
+<hr class="mtl">
 
 <div class="row text-color-primary">
   <div class="col-sm-12">

@@ -1,22 +1,26 @@
-<div class="col-md-4 col-sm-6 clearfix inline-block mbm">
-  <%= link_to photo do %>
-    <% if photo.url? %>
-      <%= image_tag(photo.url.small, alt: photo.name, class: 'img-rounded img-responsive center-block') %>
-    <% else %>
-      <img src="http://placehold.it/360x240" alt="Photo" class="img-rounded img-responsive center-block">
-    <% end %>
-  <% end %>
-
-  <small>
-    <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
-
-    <span class="pull-right">
-      <% if photo.name.nil? %>
-        Photo
+<div class="panel panel-default inline-block">
+  <div class="panel-heading">
+    <%= link_to photo do %>
+      <% if photo.url? %>
+        <%= image_tag(photo.url.small, alt: photo.name, class: 'img-rounded img-responsive') %>
       <% else %>
-        <%= photo.name %>
+        <img src="http://placehold.it/240x240" alt="Photo" class="img-rounded img-responsive">
       <% end %>
-      by: <%= link_to photo.user.name, photo.user %>
-    </span>
-  </small>
+    <% end %>
+  </div>  
+  
+  <div class="panel-body">
+    <small>
+      <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+
+      <span class="pull-right">
+        <% if photo.name.nil? %>
+          Photo
+        <% else %>
+          <%= photo.name %>
+        <% end %>
+        by: <%= link_to photo.user.name, photo.user %>
+      </span>
+    </small>
+  </div>
 </div>

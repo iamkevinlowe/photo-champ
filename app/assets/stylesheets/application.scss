@@ -29,6 +29,11 @@ html, body {
   border-radius: 0;
 }
 
+.greet {
+  color: #777;
+  padding: 15px;
+}
+
 .dropdown-menu {
   background-color: #eee;
 }
@@ -39,10 +44,6 @@ html, body {
 
 .mtl {
   margin-top: 20px;
-}
-
-.file-mtm {
-  margin-top: 14px;
 }
 
 .mbl {
@@ -66,7 +67,8 @@ hr {
   color: #777;
 }
 
-.inline-block {
+.panel {
+  margin: 10px 5px;
   display: inline-block;
 }
 
@@ -91,4 +93,12 @@ hr {
 
 span.glyphicon-pencil {
   font-size: small;
+}
+
+.no-padding-l {
+  padding-left: 0;
+}
+
+.no-padding-r {
+  padding-right: 0;
 }

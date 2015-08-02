@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     Challenge.send_results
     @user = User.find(params[:id])
-    @top_photos = Photo.top_photos(3)
+    @top_photos = Photo.top_photos(4)
     @challenges = Challenge.challenger_challenges(@user).includes(:challenger, :challenged) + Challenge.challenged_challenges(@user).includes(:challenger, :challenged)
     @favorites = Photo.where(id: @user.favorites.pluck(:photo_id)).includes(:category, :user)
     @photos = @user.photos.includes(:category)

@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @categories = Category.all.paginate(page: params[:page], per_page: 5)
+    @categories = Category.all.paginate(page: params[:page], per_page: 4)
     @category = Category.new
   end
 

@@ -1,11 +1,8 @@
 <div class="row text-color-primary">
   <div class="col-sm-12">
     <h3>Top Competitors</h3>
+    <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
   </div>
-</div>
-
-<div class="row">
-  <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
 </div>
 
 <hr class="mtl">
@@ -14,11 +11,8 @@
   <div class="row text-color-primary">
     <div class="col-sm-12">
       <h3>Current Challenges</h3>
+      <%= render partial: @challenges %>
     </div>
-  </div>
-
-  <div class="row">
-    <%= render partial: @challenges %>
   </div>
 
   <hr class="mtl">
@@ -28,11 +22,8 @@
   <div class="row text-color-primary">
     <div class="col-sm-12">
       <h3>Favorite Photos</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
+      <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
+      </div>
   </div>
 
   <hr class="mtl">
@@ -41,16 +32,22 @@
 <div class="row text-color-primary">
   <div class="col-sm-12">
     <h3>My Photos</h3>
-  </div>
-</div>
+    <%= render partial: @photos %>
 
-<div class="row">
-  <%= render partial: @photos %>
-  <% if policy(@photo).new? && @user == current_user %>
-    <div class="col-md-4 col-sm-6 inline-block">
-      <%= link_to new_photo_path do %>
-        <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
-      <% end %>
-    </div>
-  <% end %>
+    <% if policy(@photo).new? && @user == current_user %>
+      <div class="panel panel-default inline-block">
+        <div class="panel-heading">
+          <%= link_to new_photo_path do %>
+            <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
+          <% end %>
+        </div>
+
+        <div class="panel-body">
+          <small>
+            <span class="pull-left text-center">Upload a new photo</span>
+          </small>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

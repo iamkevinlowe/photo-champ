@@ -5,10 +5,10 @@ class Challenge < ActiveRecord::Base
   before_create :default_val
 
   scope :challenger_challenges, -> (user) {
-    Challenge.active_challenges.where(challenger_id: user.photo_ids)
+    Challenge.where(completed: false, challenger_id: user.photo_ids)
   }
   scope :challenged_challenges, -> (user) {
-    Challenge.active_challenges.where(challenged_id: user.photo_ids)
+    Challenge.where(completed: false, challenged_id: user.photo_ids)
   }
   scope :active_challenges, -> {
     Challenge.where("completed = ?", false).where.not(ends_at: nil)
