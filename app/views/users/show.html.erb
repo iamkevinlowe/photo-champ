@@ -31,7 +31,7 @@
 
 <div class="row text-color-primary">
   <div class="col-sm-12">
-    <h3>My Photos</h3>
+    <h3><%= @user.name.possessive %> Photos</h3>
     <%= render partial: @photos %>
 
     <% if policy(@photo).new? && @user == current_user %>
@@ -44,7 +44,9 @@
 
         <div class="panel-body">
           <small>
-            <span class="pull-left text-center">Upload a new photo</span>
+            <%= link_to new_photo_path do %>
+              <span class="pull-right">Upload a new photo</span>
+            <% end %>
           </small>
         </div>
       </div>

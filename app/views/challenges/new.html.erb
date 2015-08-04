@@ -10,7 +10,7 @@
     <div class="col-sm-6 form-inline">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.select :challenger_id, @challenger_photos.map{|p| [p.name, p.id, data: { url: p.url.challenge.url }] }, {}, class: 'form-control' %>
+        <%= f.select :challenger_id, @challenger_photos.map{|p| [p.name, p.id, data: { url: p.file.challenge.url }] }, {}, class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -30,8 +30,8 @@
     </div>
 
     <div class="col-sm-6">
-      <% if @challenged_photo.url? %>
-        <%= image_tag(@challenged_photo.url.challenge, alt: @challenged_photo.name, class: 'img-rounded img-responsive') %>
+      <% if @challenged_photo.file? %>
+        <%= image_tag(@challenged_photo.file.challenge, alt: @challenged_photo.name, class: 'img-rounded img-responsive') %>
       <% else %>
         <img src="http://placehold.it/550x367" alt="Photo" class="img-rounded img-responsive">
       <% end %>

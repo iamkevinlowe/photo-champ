@@ -1,8 +1,8 @@
 <div class="panel panel-default inline-block">
   <div class="panel-heading">
     <%= link_to photo do %>
-      <% if photo.url? %>
-        <%= image_tag(photo.url.small, alt: photo.name, class: 'img-rounded img-responsive') %>
+      <% if photo.file? %>
+        <%= image_tag(photo.file.small, alt: photo.name, class: 'img-rounded img-responsive') %>
       <% else %>
         <img src="http://placehold.it/240x240" alt="Photo" class="img-rounded img-responsive">
       <% end %>
@@ -11,15 +11,14 @@
   
   <div class="panel-body">
     <small>
-      <span class="pull-left"><%= link_to photo.category.name.capitalize, photo.category %></span>
+      <span class="pull-left">
+        <%= link_to truncate(photo.category.name, length: 15), photo.category %>
+      </span>
 
       <span class="pull-right">
-        <% if photo.name.nil? %>
-          Photo
-        <% else %>
-          <%= photo.name %>
-        <% end %>
-        by: <%= link_to photo.user.name, photo.user %>
+        <%= truncate(photo.name, length: 15) || "Photo" %>
+        by: 
+        <%= link_to photo.user.name, photo.user %>
       </span>
     </small>
   </div>

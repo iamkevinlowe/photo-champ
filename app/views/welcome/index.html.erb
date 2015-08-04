@@ -11,10 +11,10 @@
     <% if @top_photos.any? %>
       <% @top_photos.each_with_index do |photo, index| %>
         <%= index == 0 ? tag('div', class: 'item active') : tag('div', class: 'item') %>
-          <% if photo.url? %>
-            <%= image_tag(photo.url.feature, alt: photo.name, class: 'middle') %>
+          <% if photo.file? %>
+            <%= image_tag(photo.file.feature, alt: photo.name, class: 'center-block') %>
           <% else %>
-            <img src="http://placehold.it/960x640" alt="Photo" class="middle">
+            <img src="http://placehold.it/960x640" alt="Photo" class="center-block">
           <% end %>  
           <div class="carousel-caption">
             <p><%= photo.name? ? photo.name.capitalize : photo.category.name.capitalize %></p>

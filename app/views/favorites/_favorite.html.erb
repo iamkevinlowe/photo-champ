@@ -1,11 +1,12 @@
 <% if policy(Favorite.new).create? %>
   <% if favorite = current_user.favorited(photo) %>
-    <%= link_to [photo, favorite], method: :delete do %>
-      <span class="favorite glyphicon glyphicon-star"></span>
+    <%= link_to [photo, favorite], method: :delete, remote: true do %>
+      <span class="glyphicon glyphicon-star"></span>
     <% end %>
+
   <% else %>
-    <%= link_to [photo, Favorite.new], method: :post do %>
-      <span class="favorite glyphicon glyphicon-star-empty"></span>
+    <%= link_to [photo, Favorite.new], method: :post, remote: true do %>
+      <span class="glyphicon glyphicon-star-empty"></span>
     <% end %>
   <% end %>
 <% end %>

@@ -25,15 +25,15 @@ $(function(){
   <%= tag(:meta, property: 'og:title', content: "#{@challenge.challenger.user.name} vs #{@challenge.challenged.user.name}!") %>
   <%= tag(:meta, property: 'og:description', content: "Vote for your favorite photo. Share the challenge and see who comes out on top!") %>
   <%= tag(:meta, property: 'og:site_name', content: "PhotoCha.mp") %>
-  <%= tag(:meta, property: 'og:image', content: @challenge.challenger.url.challenge.url) %>
-  <%= tag(:meta, property: 'og:image', content: @challenge.challenged.url.challenge.url) %>
+  <%= tag(:meta, property: 'og:image', content: @challenge.challenger.file.small.url) %>
+  <%= tag(:meta, property: 'og:image', content: @challenge.challenged.file.small.url) %>
 
   <!-- Twitter meta tags -->
   <%= tag(:meta, property: 'twitter:card', content: "summary") %>
   <%= tag(:meta, property: 'twitter:description', content: "Vote for your favorite photo. Share the challenge and see who comes out on top!") %>
   <%= tag(:meta, property: 'twitter:title', content: "#{@challenge.challenger.user.name} vs #{@challenge.challenged.user.name}!") %>
-  <%= tag(:meta, property: 'twitter:image0', content: @challenge.challenger.url.challenge.url) %>
-  <%= tag(:meta, property: 'twitter:image1', content: @challenge.challenged.url.challenge.url) %>
+  <%= tag(:meta, property: 'twitter:image0', content: @challenge.challenger.file.small.url) %>
+  <%= tag(:meta, property: 'twitter:image1', content: @challenge.challenged.file.small.url) %>
 <% end %>
 
 <div class="row text-color-primary">
@@ -72,16 +72,16 @@ $(function(){
 <hr>
 
 <div class="row text-color-primary text-center">
-  <div class="col-sm-6 no-padding-r">
+  <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="text-color-primary"><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
         <%= link_to @challenge.challenger do %>
-          <%= image_tag(@challenge.challenger.url.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
+          <%= image_tag(@challenge.challenger.file.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
         <% end %>
       </div>
 
-      <% if @challenge.ends_at? && !@challenge.completed? %>
+      <% if policy(@challenge).vote? %>
         <div class="panel-body">
           <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenger' }), class: 'btn btn-default' %>
         </div>
@@ -89,16 +89,16 @@ $(function(){
     </div>
   </div>
 
-  <div class="col-sm-6 no-padding-l">
+  <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="text-color-primary"><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
         <%= link_to @challenge.challenged do %>
-          <%= image_tag(@challenge.challenged.url.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
+          <%= image_tag(@challenge.challenged.file.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
         <% end %>
       </div>
   
-      <% if @challenge.ends_at? && !@challenge.completed? %>
+      <% if policy(@challenge).vote? %>
         <div class="panel-body">      
           <%= link_to "Vote", vote_path(id: @challenge.id, challenge: { vote: 'challenged' }), class: 'btn btn-default' %>
         </div>

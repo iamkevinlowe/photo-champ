@@ -4,8 +4,8 @@
       <div class="panel-heading">
         <h3 class="text-color-primary"><%= @photo.name || "" %></h3>
 
-        <% if @photo.url? %>
-          <%= image_tag(@photo.url, alt: @photo.name, class: 'img-rounded img-responsive') %>
+        <% if @photo.file? %>
+          <%= image_tag(@photo.file, alt: @photo.name, class: 'img-rounded img-responsive') %>
         <% else %>
           <img src="http://placehold.it/1140x760" alt="Photo" class="img-rounded img-responsive">
         <% end %>
@@ -15,11 +15,9 @@
         <div class="row text-color-primary">
           <div class="col-xs-4">
             <h5><%= link_to @photo.category.name.capitalize, @photo.category %></h5>
-
-            <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
-            <% if policy(@challenge).new? %>
-              <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
-            <% end %>
+            <div class="favorite">
+              <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
+            </div>
           </div>
 
           <div class="col-xs-4">
@@ -32,6 +30,10 @@
             <h5>Photo by: <%= link_to @photo.user.name, @photo.user %></h5>
 
             <div class="btn-group">
+              <% if policy(@challenge).new? %>
+                <%= link_to "Challenge", new_challenge_path(photo_id: @photo.id), class: 'btn btn-default' %>
+              <% end %>
+
               <% if policy(@photo).edit? %>
                 <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
               <% end %>

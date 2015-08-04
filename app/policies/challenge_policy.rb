@@ -2,12 +2,13 @@ class ChallengePolicy < ApplicationPolicy
 
   def new?
     user && 
-    record.challenged.user != user && 
+    user != record.challenged.user && 
     user.photos.pluck(:category_id).include?(record.challenged.category_id)
   end
 
   def create?
-    record.challenger.category == record.challenged.category
+    Challenge.where("challenger_id = ? AND challenged_id = ?", record.challenger_id, record.challenged_id).empty? &&
+    Challenge.where("challenger_id = ? AND challenged_id = ?", record.challenged_id, record.challenger_id).empty?
   end
 
   def vote?

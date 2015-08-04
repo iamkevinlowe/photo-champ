@@ -37,7 +37,6 @@ categories = Category.all
 # Create Photos
 50.times do
   Photo.create(
-    url: 'http://placehold.it/360x240',
     win: rand(50),
     loss: rand(50),
     tie: rand(10),

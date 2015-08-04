@@ -1,14 +1,14 @@
 <div class="panel panel-default inline-block">
   <div class="panel-heading">
     <%= link_to challenge do %>
-      <% if challenge.challenger.url? %>
-        <%= image_tag(challenge.challenger.url.small, alt: challenge.challenger.name, class: 'img-rounded img-responsive') %>
+      <% if challenge.challenger.file? %>
+        <%= image_tag(challenge.challenger.file.small, alt: challenge.challenger.name, class: 'img-rounded img-responsive') %>
       <% else %>
         <img src="http://placehold.it/240x240" class="img-rounded img-responsive">
       <% end %>
 
-      <% if challenge.challenged.url? %>
-        <%= image_tag(challenge.challenged.url.small, alt: challenge.challenged.name, class: 'img-rounded img-responsive') %>
+      <% if challenge.challenged.file? %>
+        <%= image_tag(challenge.challenged.file.small, alt: challenge.challenged.name, class: 'img-rounded img-responsive') %>
       <% else %>
         <img src="http://placehold.it/240x240" class="img-rounded img-responsive">
       <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728192148) do
+ActiveRecord::Schema.define(version: 20150804170140) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150728192148) do
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "photos", force: :cascade do |t|
-    t.string   "url"
+    t.string   "file"
     t.integer  "win"
     t.integer  "loss"
     t.integer  "tie"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150728192148) do
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.string   "name"
+    t.float    "rank"
   end
 
   add_index "photos", ["category_id"], name: "index_photos_on_category_id"

@@ -16,7 +16,11 @@ class CategoriesController < ApplicationController
     if @category.save
       flash[:notice] = "\"#{@category.name}\" was created successfully."
     else
-      flash[:error] = "Something went wrong. Please try again."
+      if @category.errors.any?
+        flash[:error] = @category.errors.full_messages.first
+      else
+        flash[:error] = "Something went wrong. Please try again."
+      end
     end
     redirect_to :back
   end

@@ -11,7 +11,6 @@ class PhotosController < ApplicationController
   def new
     @photo = Photo.new
     @categories = Category.all.pluck(:name, :id)
-    @category = Category.new
     authorize @photo
   end
 
@@ -23,8 +22,8 @@ class PhotosController < ApplicationController
       flash[:notice] = "Your photo uploaded successfully."
       redirect_to @photo
     else
-      flash[:error] = "Something went wrong. Please try again."
-      redirect_to :back
+      @categories = Category.all.pluck(:name, :id)
+      render :new
     end
   end
 
@@ -40,7 +39,7 @@ class PhotosController < ApplicationController
       flash[:notice] = "Your photo was updated successfully."
       redirect_to @photo
     else
-      flash[:error] = "Something went wrong. Please try again."
+      @categories = Category.all.pluck(:name, :id)
       render :edit
     end
   end
@@ -60,6 +59,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:url, :win, :loss, :tie, :category_id, :name)
+    params.require(:photo).permit(:file, :win, :loss, :tie, :category_id, :name, :new_category_name)
   end
 end
