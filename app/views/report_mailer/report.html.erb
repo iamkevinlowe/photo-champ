@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello,</h1>
+    <p>
+      <%= @photo.name %> has been reported as inappropriate by at least 10 users. Please remove it as soon as possible.
+    </p>
+    <p>
+      Link to <%= link_to "photo", @photo %>.
+    </p>
+  </body>
+</html>

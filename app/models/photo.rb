@@ -6,6 +6,7 @@ class Photo < ActiveRecord::Base
   belongs_to :category
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :reports, dependent: :destroy
 
   attr_accessor :new_category_name
 
@@ -56,6 +57,10 @@ class Photo < ActiveRecord::Base
     new_rank += (10 - (age_in_days / 3)) if age_in_days < 30
 
     self.update_attribute(:rank, new_rank)
+  end
+
+  def send_reported_email
+    ReportMailer.report(self).deliver_later if self.reports.count > 10
   end
 
   private

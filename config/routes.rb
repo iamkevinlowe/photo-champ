@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :photos, except: [:index] do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
+    resources :reports, only: [:create, :destroy]
   end
   resources :challenges, except: [:edit, :update, :destroy]
   get 'vote' => 'challenges#vote'

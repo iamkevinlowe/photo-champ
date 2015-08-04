@@ -10,11 +10,16 @@ class User < ActiveRecord::Base
   has_many :photos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :reports, dependent: :destroy
 
   after_initialize :default_role
 
   def favorited(photo)
-    favorites.where(photo_id: photo.id).first
+    favorites.where("photo_id = ?", photo.id).first
+  end
+
+  def reported(photo)
+    reports.where("photo_id = ?", photo.id).first
   end
 
   private

@@ -26,15 +26,29 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h3 class="text-color-primary">
-      Think you have a blue ribbon photo?<br>
-      Prove it in a duel and see who comes out on top.<br>
-      Will you be undefeated?
-    </h3>
+<div class="row text-color-primary max-960">
+  <div class="col-sm-4">
+    <h3>PhotoChamp</h3>
+    <p>A place to share your photos</p>
+  </div>
+
+  <div class="col-sm-4">
+    <h3>Compete</h3>
+    <p>The best photos come out on top</p>
+  </div>
+
+  <div class="col-sm-4">
+    <h3>Improve</h3>
+    <p>The more you challenge, the better your photography skills become</p>
+  </div>
+</div>
+
+<div class="row text-color-primary">
+  <div class="col-md-12">
     <div class="text-center">
       <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-default' %>
+      or
+      <%= link_to "Log In", new_user_session_path, class: 'btn btn-default' %>
     </div>
   </div>
 </div>
