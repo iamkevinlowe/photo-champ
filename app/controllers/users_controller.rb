@@ -10,9 +10,21 @@ class UsersController < ApplicationController
     @photo = Photo.new
   end
 
+  def update
+    admin = User.find(params[:admin_id])
+    @user = User.find(params[:id])
+    authorize admin
+    if @user.update_attributes(user_params)
+      flash[:notice] = "The user has been updated."
+    else
+      flash[:error] = "Something went wrong. Please try again."
+    end
+    redirect_to :back
+  end
+
   private
 
   def user_params
-    permit.require(:user).permit(:name, :role)
+    params.require(:user).permit(:name, :role, :banned)
   end
 end

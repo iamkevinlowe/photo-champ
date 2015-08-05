@@ -26,11 +26,14 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Categories", categories_path %></li>
             <li><%= link_to "Challenges", challenges_path %></li>
-            <li>
-              <% if current_user %>
-                <%= link_to "My Page", current_user %>
+            
+            <% if current_user %>
+              <li><%= link_to "My Page", current_user %></li>
+              
+              <% if current_user.role == 'admin' %>
+                <li><%= link_to "Admin Page", admins_path %>
               <% end %>
-            </li>
+            <% end %>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

@@ -2,13 +2,13 @@ class CategoriesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @categories = Category.all.paginate(page: params[:page], per_page: 4)
+    @categories = Category.all.includes(photos: [:user]).paginate(page: params[:page], per_page: 4)
     @category = Category.new
   end
 
   def show
     @category = Category.find(params[:id])
-    @photos = @category.photos.paginate(page: params[:page], per_page: 12)
+    @photos = @category.photos.includes(:user).paginate(page: params[:page], per_page: 12)
   end
 
   def create

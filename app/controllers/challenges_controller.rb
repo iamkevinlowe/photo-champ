@@ -1,4 +1,5 @@
 class ChallengesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :vote]
 
   def index
     @challenges = Challenge.active_challenges.includes(:challenger, :challenged).paginate(page: params[:page], per_page: 12)
@@ -44,10 +45,8 @@ class ChallengesController < ApplicationController
   end
 
   def accept
-    # user = User.where(email: params[:sender]).first
-    # in policy check that the user is the owner of the challenged photo
-
     @challenge = Challenge.find(params[:id])
+    authorize @challenge
     if @challenge.start!
       flash[:notice] = "The challenge has begun!"
       redirect_to @challenge

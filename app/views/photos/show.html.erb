@@ -14,7 +14,7 @@
       <div class="panel-body">
         <div class="row text-color-primary">
           <div class="col-xs-4">
-            <h5><%= link_to @photo.category.name.capitalize, @photo.category %></h5>
+            <h5><%= link_to @photo.category.name, @photo.category %></h5>
             <div class="favorite">
               <%= render partial: 'favorites/favorite', locals: { photo: @photo } %>
             </div>
@@ -35,7 +35,9 @@
               <% end %>
 
               <%= render partial: 'reports/report', locals: { photo: @photo } %>
+            </div>
 
+            <div class="btn-group">
               <% if policy(@photo).edit? %>
                 <%= link_to "Edit", edit_photo_path, class: 'btn btn-default' %>
               <% end %>

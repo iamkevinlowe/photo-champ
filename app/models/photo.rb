@@ -52,9 +52,11 @@ class Photo < ActiveRecord::Base
   end
 
   def update_rank
-    new_rank = (2 * self.win) + self.tie
-    age_in_days = (Time.now - self.created_at) / (60 * 60 * 24)
-    new_rank += (10 - (age_in_days / 3)) if age_in_days < 30
+    score = (2 * self.win) + self.tie
+    age_in_seconds = self.created_at.to_i - 1437594344
+
+    order = Math.log((score).abs, 10)
+    new_rank = (order + age_in_seconds / 45000.0).round(7)
 
     self.update_attribute(:rank, new_rank)
   end

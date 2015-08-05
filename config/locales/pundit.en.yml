@@ -1,0 +1,7 @@
+en:
+  pundit:
+    default: 'You are not authorized to perform this action.'
+    challenge_policy:
+      create?: 'You are already in a challenge with that photo.'
+      vote?: 'The challenge is over.'
+      accept?: 'You are not signed in as the challenged owner.'

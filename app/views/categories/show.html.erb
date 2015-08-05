@@ -5,7 +5,7 @@
       <span class="glyphicon glyphicon-pencil"></span>
         <%= best_in_place @category, :name %>
       <% else %>
-        <%= @category.name.capitalize %>
+        <%= @category.name %>
       <% end %>
     </h3>
     <% if policy(@category).destroy? %>

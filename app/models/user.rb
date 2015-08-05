@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     reports.where("photo_id = ?", photo.id).first
   end
 
+  def active_for_authentication?
+    super && !self.banned
+  end
+
   private
 
   def default_role
