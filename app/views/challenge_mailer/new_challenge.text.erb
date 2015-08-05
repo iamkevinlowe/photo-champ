@@ -1,0 +1,5 @@
+Hi <%= @challenge.challenged.user.name %>,
+
+A new challenge awaits! <%= @challenge.challenger.user.name %> thinks their photo is better than yours - <%= @challenge.challenged.name %>. The challenge will last <%= @challenge.length %> hours. Do you accept the invitation?
+
+Click <%= link_to "this link", accept_url(id: @challenge.id) %> to accept the challenge.

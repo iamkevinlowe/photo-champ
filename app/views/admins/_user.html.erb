@@ -1,0 +1,11 @@
+<%= form_for user, url: admin_user_path(current_user, user) do |f| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= link_to user.name, user %></td>
+    <td><%= user.email %></td>
+    <td>
+      <%= f.check_box :banned %>
+      <%= f.submit "Save", class: 'btn btn-default btn-xs' %>
+    </td>
+  </tr>
+<% end %>

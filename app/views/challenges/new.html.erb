@@ -10,34 +10,35 @@
     <div class="col-sm-6 form-inline">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.select :challenger_id, @challenger_photos.pluck(:name, :id), {}, { class: 'form-control' } %>
+        <%= f.select :challenger_id, @challenger_photos.map{|p| [p.name, p.id, data: { url: p.file.challenge.url }] }, {}, class: 'form-control' %>
       </div>
+
       <div class="form-group">
         <%= f.label :length %>
         <%= f.select :length, @challenge_length_options, {}, { class: 'form-control' } %>
       </div>
     </div>
+
     <div class="col-sm-6 text-center">
       <h4><%= @challenged_photo.name %></h4>
     </div>
   </div>
 
-  <div class="row text-color-primary mtl">
+  <div class="row mtl">
     <div class="col-sm-6 challenge-preview">
-      <!-- I want javascript to render image when select is changed  -->
-      <img class="img-rounded img-responsive"/>
+      <img src="http://placehold.it/550x367" alt="Photo" class="img-rounded img-responsive">
     </div>
 
     <div class="col-sm-6">
-      <% if @challenged_photo.url? %>
-        <%= image_tag(@challenged_photo.url.challenge, alt: @challenged_photo.name, class: 'img-rounded img-responsive') %>
+      <% if @challenged_photo.file? %>
+        <%= image_tag(@challenged_photo.file.challenge, alt: @challenged_photo.name, class: 'img-rounded img-responsive') %>
       <% else %>
         <img src="http://placehold.it/550x367" alt="Photo" class="img-rounded img-responsive">
       <% end %>
     </div>
   </div>
 
-  <div class="row text-color-primary mtl">
+  <div class="row mtl">
     <div class="col-sm-12 text-right">
       <div class="form-group">
         <%= f.submit "Challenge!", class: 'btn btn-default' %>
@@ -47,18 +48,16 @@
 <% end %>
 
 <script>
-  $(function() {
-    initPage();
-  });
+  $(document).ready(function() {
+    var $sel = $("#challenge_challenger_id")
+    preview($("option:selected", $sel).attr("data-url"));
 
-  $(window).bind('page:change', function() {
-    initPage();
-  });
-
-  function initPage() {
-    $('#challenge_challenger_id').change(function() {
-      var src = $(this).val();
-    
+    $sel.change(function() {
+      preview($("option:selected", $sel).attr("data-url"));
     });
+  });
+
+  function preview(url) {
+    $(".col-sm-6.challenge-preview img").attr("src", url);
   }
 </script>

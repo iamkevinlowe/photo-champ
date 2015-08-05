@@ -1,10 +1,11 @@
 <div class="row text-color-primary">
-  <div class="col-md-12">
+  <div class="col-sm-12">
     <h3>
       <% if policy(@category).edit? %>
+      <span class="glyphicon glyphicon-pencil"></span>
         <%= best_in_place @category, :name %>
       <% else %>
-        <%= @category.name.capitalize %>
+        <%= @category.name %>
       <% end %>
     </h3>
     <% if policy(@category).destroy? %>
@@ -14,8 +15,6 @@
 </div>
 
 <div class="row text-color-primary">
-  <div class="col-md-12">
-    <%= render partial: @photos %>
-    <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
-  </div>
+  <%= render partial: @photos %>
+  <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
 </div>

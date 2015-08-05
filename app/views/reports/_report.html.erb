@@ -1,0 +1,7 @@
+<% if policy(photo.reports.build).create? %>
+  <% if report = current_user.reported(photo) %>
+     <%= link_to "Unreport", [photo, report], method: :delete, class: 'btn btn-default' %>
+  <% else %>
+    <%= link_to "Report", [photo, Report.new], method: :post, class: 'btn btn-default' %>
+  <% end %>
+<% end %>

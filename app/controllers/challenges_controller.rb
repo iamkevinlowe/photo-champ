@@ -1,4 +1,9 @@
 class ChallengesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :vote]
+
+  def index
+    @challenges = Challenge.active_challenges.includes(:challenger, :challenged).paginate(page: params[:page], per_page: 12)
+  end
 
   def show
     Challenge.send_results
@@ -15,40 +20,45 @@ class ChallengesController < ApplicationController
   def create
     @challenge = Challenge.new(challenge_params)
     authorize @challenge
-    # I want to refactor this so and email gets sent and the challenged user must accept the invitation
     if @challenge.save
-      flash[:notice] = "A new challenge has been created successfully!"
+      ChallengeMailer.new_challenge(@challenge).deliver_later
+      flash[:notice] = "A challenge invitation email has been sent to the user!"
       redirect_to @challenge
     else
       flash[:error] = "Something went wrong. Please try again."
-      redirect_to :new
+      redirect_to :back
     end
-  end
-
-  def update
-
   end
 
   def vote
     @challenge = Challenge.find(params[:id])
-    challenger = challenge_params[:votes_challenger]
-    challenged = challenge_params[:votes_challenged]
-    @challenge.votes_challenger += 1 if challenger
-    @challenge.votes_challenged += 1 if challenged
+    someone = challenge_params[:vote]
     authorize @challenge
-    if @challenge.save
+    if @challenge.vote_for(someone)
       flash[:notice] = "Thanks for your vote!"
-      redirect_to @challenge.challenger if challenger
-      redirect_to @challenge.challenged if challenged
+      redirect_to @challenge.challenger if someone == 'challenger'
+      redirect_to @challenge.challenged if someone == 'challenged'
     else
       flash[:error] = "The vote didn't go through."
       redirect_to :back
     end
   end
 
+  def accept
+    @challenge = Challenge.find(params[:id])
+    authorize @challenge
+    if @challenge.start!
+      flash[:notice] = "The challenge has begun!"
+      redirect_to @challenge
+    else
+      flash[:error] = "Something went wrong. Please try again."
+      redirect_to :root
+    end
+  end
+
   private
 
   def challenge_params
-    params.require(:challenge).permit(:challenger_id, :challenged_id, :length, :votes_challenger, :votes_challenged)
+    params.require(:challenge).permit(:challenger_id, :challenged_id, :length, :vote)
   end
 end

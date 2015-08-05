@@ -4,7 +4,7 @@
 
 <%= render partial: @categories %>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-sm-12">
     <%= will_paginate @categories, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
   </div>
 </div>

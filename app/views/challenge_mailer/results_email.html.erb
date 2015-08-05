@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @photo.user.name %></h1>
+    <h1>Hi <%= @photo.user.name %>,</h1>
     <p>
       <% if @result == 'win' %>
         Congratulations, your <%= link_to "photo", @photo %> won!
@@ -13,7 +13,7 @@
       <% elsif @result == 'tie' %>
         Draw! Your <%= link_to "photo", @photo %> tied.
       <% end %>
-      Start a new <%= link_to "challenge", category_path(@photo.category) %>.
+      Start a new <%= link_to "challenge", category_url(@photo.category) %>.
     </p>
     <h3>Current photo record:</h3>
     <p>

@@ -19,7 +19,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :small, from_version: :challenge do
-    process resize_to_fit: [360, 360]
+    process resize_to_fill: [240, 240]
   end
 
   def extension_white_list

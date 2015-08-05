@@ -15,8 +15,8 @@ class PhotoPolicy < ApplicationPolicy
   end
 
   def edit?
-    if user.present?
-      record.user == user ||
+    if user && !record.in_challenge?
+      user == record.user ||
       user.role == 'admin'
     end
   end

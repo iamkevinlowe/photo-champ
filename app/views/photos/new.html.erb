@@ -1,36 +1,33 @@
-<% if policy(@category).create? %>
-  <%= render partial: 'categories/form', locals: { category: @category } %>
+<% if @photo.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <div class="row text-color-primary">
-  <div class="col-sm-4">
+  <div class="col-sm-12">
     <h3>Upload Photo</h3>
-  </div>
 
-  <div class="col-sm-8 text-right mtl">
-     <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
-  </div>
-</div>
-
-<hr class="mtl">
-
-<div class="row mtl">
-  <div class="col-sm-12 upload-preview">
-    <!-- Created an upload_preview javascript -->
-    <img class="img-rounded img-responsive middle"/>
+    <div class="text-center">
+      <div class="panel panel-default">
+        <div class="panel-heading upload-preview">
+          <img class="img-rounded img-responsive center-block"/>
+        </div>
+      
+        <div class="panel-body">
+          <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-  $(function() {
-    initPage();
-  });
-
-  $(window).bind('page:change', function() {
-    initPage();
-  });
-
-  function initPage() {
+  $(document).ready(function() {
     var preview = $(".upload-preview img");
     
     $("#photo_url").change(function(event){
@@ -43,5 +40,5 @@
        };
        reader.readAsDataURL(file);
     });
-  }
+  });
 </script>

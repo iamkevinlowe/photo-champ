@@ -1,17 +1,30 @@
-<div class="row text-color-primary">
-  <div class="col-sm-4">
-    <h3>Edit Photo</h3>
+<% if @photo.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
+<% end %>
 
-  <div class="col-sm-8 text-right mtl">
-    <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
+<div class="row text-color-primary">
+  <div class="col-sm-12">
+    <h3>Edit Photo</h3>
   </div>
 </div>
 
-<hr class="mtl">
-
-<div class="row mtl">
+<div class="row text-color-primary">
   <div class="col-sm-12">
-    <%= image_tag(@photo.url, alt: @photo.name, class: 'img-responsive middle') %>
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <%= image_tag(@photo.file, alt: @photo.name, class: 'img-rounded img-responsive') %>
+      </div>
+
+      <div class="panel-body">
+        <%= render partial: 'photos/form', locals: { photo: @photo, categories: @categories } %>
+      </div>
+    </div>
   </div>
 </div>
