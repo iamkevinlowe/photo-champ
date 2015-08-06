@@ -1,5 +1,6 @@
 <% if @comment.destroyed? %>
   $("#comment-" + <%= @comment.id %>).hide();
+  blocmetrics.report("Comment removed");
 <% else %>
   %("#comment-" + <%= @comment.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>");
 <% end %>

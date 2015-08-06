@@ -16,6 +16,8 @@ $(function(){
   var timeLeft = new Date(<%= (@challenge.ends_at? ? @challenge.ends_at : 0).to_f * 1000 %>);
   $(".countdown").countdown({until: timeLeft, compact: true});
 });
+
+blocmetrics.report("Challenge viewed");
 </script>
 
 <%= content_for :meta_tags do %>
