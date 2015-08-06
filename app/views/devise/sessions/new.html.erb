@@ -1,7 +1,6 @@
-<h2 class="text-color-primary">Log in</h2>
-
 <div class="row">
   <div class="col-md-8">
+    <h3>Log in</h3>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
@@ -15,7 +14,7 @@
       <% if devise_mapping.rememberable? -%>
         <div class="form-group">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, class: 'text-color-primary' %>
+          <%= f.label :remember_me %>
         </div>
       <% end -%>
 

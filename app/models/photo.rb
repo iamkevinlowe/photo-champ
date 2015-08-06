@@ -19,7 +19,7 @@ class Photo < ActiveRecord::Base
   before_save :create_category_from_name
 
   scope :top_photos, -> (limit) { 
-    Photo.where("win > loss").order("rank DESC").includes(:category, :user).take(limit)
+    Photo.order("rank DESC").includes(:category, :user).take(limit)
   }
   scope :challenge_photos, -> (user) { 
     photo_ids = user.photo_ids
@@ -55,7 +55,7 @@ class Photo < ActiveRecord::Base
     score = (2 * self.win) + self.tie
     age_in_seconds = self.created_at.to_i - 1437594344
 
-    order = Math.log((score).abs, 10)
+    order = Math.log([score, 1].max, 10)
     new_rank = (order + age_in_seconds / 45000.0).round(7)
 
     self.update_attribute(:rank, new_rank)

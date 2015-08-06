@@ -1,20 +1,21 @@
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12">
-    <h3>
-      <% if policy(@category).edit? %>
+    <% if policy(@category).edit? %>
       <span class="glyphicon glyphicon-pencil"></span>
-        <%= best_in_place @category, :name %>
-      <% else %>
-        <%= @category.name %>
-      <% end %>
-    </h3>
+      <%= best_in_place @category, :name, class: 'h3' %>
+    <% else %>
+      <h3><%= @category.name %><h3>
+    <% end %>
+
     <% if policy(@category).destroy? %>
-      <%= link_to "Delete", @category, method: :delete, data: { confirm: "\"#{@category.name}\" will be deleted" }, class: 'btn btn-danger mbm' %>
+      <%= link_to @category, method: :delete, data: { confirm: "\"#{@category.name}\" will be deleted" } do %>
+        <span class="glyphicon glyphicon-remove text-danger"></span>
+      <% end %>
     <% end %>
   </div>
 </div>
 
-<div class="row text-color-primary">
+<div class="row">
   <%= render partial: @photos %>
   <%= will_paginate @photos, renderer: BootstrapPagination::Rails, class: 'pagination-sm' %>
 </div>

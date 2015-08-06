@@ -22,6 +22,14 @@ html, body {
   background: #f7f7f7;
 }
 
+#logo {
+  max-width: 40px;
+}
+
+#upload-logo {
+  max-width: 240px;
+}
+
 .max-960 {
   max-width: 960px;
   margin: 0 auto;
@@ -56,7 +64,7 @@ hr {
   border-top: 1px solid #ddd;
 }
 
-.text-color-primary {
+.row, .panel-heading h4 {
   color: #777;
 }
 
@@ -77,10 +85,6 @@ hr {
 .favorite {
   font-size: x-large;
   color: #337ab7;
-}
-
-span.glyphicon-pencil {
-  font-size: small;
 }
 
 .table {

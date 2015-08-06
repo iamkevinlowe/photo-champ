@@ -28,10 +28,11 @@
   </script>
 <% end -%>
 
-<h2 class="text-color-primary">Edit <%= resource_name.to_s.humanize %></h2>
+
 
 <div class="row">
   <div class="col-md-8">
+    <h3>Edit <%= resource_name.to_s.humanize %></h3>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
@@ -69,9 +70,8 @@
 
 <div class="row">
   <% if resource.role == 'standard' %>
-
-    <h3 class="text-color-primary">Premium Upgrade</h3>
     <div class="col-md-8">
+    <h3>Premium Upgrade</h3>
 
       <%= form_tag charges_path, method: :post, id: 'charges_form' do %>
 
@@ -85,7 +85,7 @@
           </div>
 
           <div class="pull-right">
-            <%= label_tag "Card_Expiration", nil, required: true, class: 'text-color-primary' %>
+            <%= label_tag "Card_Expiration", nil, required: true %>
             <%= select_tag "", options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, 'data-stripe' => 'exp-month', class: 'span2' %>
             <%= select_tag "", options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, 'data-stripe' => 'exp-year', class: 'span1' %>
           </div>
@@ -118,8 +118,8 @@
 <hr>
 
 <div class="row">
-  <h3 class="text-color-primary">Account changes</h3>
   <div class="col-md-8">
+    <h3>Account changes</h3>
 
     <% if resource.role == 'premium' %>
       <div class="form-group">

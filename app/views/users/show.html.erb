@@ -1,4 +1,4 @@
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12">
     <h3>Top Competitors</h3>
     <%= render partial: 'photos/photo', collection: @top_photos, as: :photo %>
@@ -8,7 +8,7 @@
 <hr class="mtl">
 
 <% if @challenges.any? %>
-  <div class="row text-color-primary">
+  <div class="row">
     <div class="col-sm-12">
       <h3>Current Challenges</h3>
       <%= render partial: @challenges %>
@@ -19,7 +19,7 @@
 <% end %>
 
 <% if @favorites.any? %>
-  <div class="row text-color-primary">
+  <div class="row">
     <div class="col-sm-12">
       <h3>Favorite Photos</h3>
       <%= render partial: 'photos/photo', collection: @favorites, as: :photo %>
@@ -29,7 +29,7 @@
   <hr class="mtl">
 <% end %>
 
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12">
     <h3><%= @user.name.possessive %> Photos</h3>
     <%= render partial: @photos %>
@@ -38,7 +38,7 @@
       <div class="panel panel-default inline-block">
         <div class="panel-heading">
           <%= link_to new_photo_path do %>
-            <%= image_tag('upload.jpg', alt: 'New Photo', class: 'img-rounded img-responsive') %>
+            <%= image_tag('upload.png', alt: 'New Photo', class: 'img-rounded img-responsive', id: 'upload-logo') %>
           <% end %>
         </div>
 
