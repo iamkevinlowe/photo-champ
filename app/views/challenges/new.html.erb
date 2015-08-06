@@ -1,4 +1,4 @@
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12">
     <h3>Create a Challenge!</h3>
   </div>
@@ -6,7 +6,7 @@
 
 <%= form_for @challenge do |f| %>
   <%= f.hidden_field :challenged_id, value: @challenged_photo.id %>
-  <div class="row text-color-primary mtl">
+  <div class="row mtl">
     <div class="col-sm-6 form-inline">
       <div class="form-group">
         <%= f.label :name %>

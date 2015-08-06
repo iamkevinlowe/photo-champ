@@ -1,8 +1,8 @@
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12 text-center">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="text-color-primary"><%= @photo.name || "" %></h3>
+        <h4><%= @photo.name || "" %></h4>
 
         <% if @photo.file? %>
           <%= image_tag(@photo.file, alt: @photo.name, class: 'img-rounded img-responsive') %>
@@ -12,7 +12,7 @@
       </div>
 
       <div class="panel-body">
-        <div class="row text-color-primary">
+        <div class="row">
           <div class="col-xs-4">
             <h5><%= link_to @photo.category.name, @photo.category %></h5>
             <div class="favorite">
@@ -59,13 +59,13 @@
 
 <hr class="mtl">
 
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12">
     <h3>Comments</h3>
   </div>
 </div>
 
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12 js-comments">
     <%= render @comments %>
   </div>

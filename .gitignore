@@ -21,3 +21,5 @@
 
 # CarrierWave image
 public/uploads
+
+public/images

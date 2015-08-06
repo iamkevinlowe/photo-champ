@@ -36,7 +36,7 @@ $(function(){
   <%= tag(:meta, property: 'twitter:image1', content: @challenge.challenged.file.small.url) %>
 <% end %>
 
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-xs-6">
     <h3><%= @challenge.challenger.category.name %> Challenge</h3>
   </div>
@@ -52,7 +52,7 @@ $(function(){
   </div>
 </div>
 
-<div class="row text-color-primary">
+<div class="row">
   <div class="col-sm-12 text-center">
     <% if !@challenge.ends_at? %>
       <hr>
@@ -71,11 +71,11 @@ $(function(){
 
 <hr>
 
-<div class="row text-color-primary text-center">
+<div class="row text-center">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="text-color-primary"><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
+        <h4><%= @challenge.challenger.name || @challenge.challenger.user.name %></h4>
         <%= link_to @challenge.challenger do %>
           <%= image_tag(@challenge.challenger.file.challenge, alt: @challenge.challenger.name, class: 'img-rounded img-responsive mbm') %>
         <% end %>
@@ -92,7 +92,7 @@ $(function(){
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="text-color-primary"><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
+        <h4><%= @challenge.challenged.name || @challenge.challenged.user.name %></h4>
         <%= link_to @challenge.challenged do %>
           <%= image_tag(@challenge.challenged.file.challenge, alt: @challenge.challenged.name, class: 'img-rounded img-responsive mbm') %>
         <% end %>
