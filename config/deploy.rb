@@ -2,7 +2,7 @@
 server '104.131.155.142', port: 2222, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:iamkevinlowe/photochamp.git'
-set :application,     'PhotoChamp'
+set :application,     'photochamp'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
@@ -31,8 +31,8 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/application.yml')
+set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
